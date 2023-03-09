@@ -36,13 +36,13 @@ Go into the desired terminal (e.x: command prompt)
 Clone the project
 
 ```bash
-  git clone git@github.com:Mark-Shun/Alisa_bot.git
+  git clone git@github.com:Mark-Shun/Alisa-bot.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd Alisa_bot
+  cd Alisa-bot
 ```
 
 Run the Alisa bot (note: make sure that Python3 is run, some terminals require entering python3 instead of just python)
