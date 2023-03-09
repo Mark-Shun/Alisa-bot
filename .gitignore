@@ -1,0 +1,7 @@
+#This file is used to not push certain things to the git repository
+
+##Specific Alisa related files##
+alisa_logs.txt
+
+# Python related files
+__pycache__/
