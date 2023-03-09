@@ -1,0 +1,4 @@
+[2023-03-09 13:20:21] [INFO    ] discord.client: logging in using static token
+[2023-03-09 13:20:22] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 9163bfc040d25c7fc958e8c1bbf5e279).
+[2023-03-09 13:20:30] [ERROR   ] discord.ext.commands.bot: Ignoring exception in command None
+discord.ext.commands.errors.CommandNotFound: Command "home" is not found

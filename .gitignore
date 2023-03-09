@@ -2,6 +2,7 @@
 
 ##Specific Alisa related files##
 alisa_logs.txt
+./alisa_logs.txt
 
 # Python related files
 __pycache__/
