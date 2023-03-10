@@ -55,6 +55,7 @@ async def on_command_error(ctx,error):
 @bot.command()
 @commands.check(lambda ctx: ctx.channel.id == config.ROLES_CHANNEL)
 async def iam(ctx, *, role: discord.Role):
+    """ Assign a role (only in #roles) """
     #Check if the role exists
     guild = ctx.guild
     role_obj = discord.utils.get(guild.roles, name=role.name)
@@ -93,6 +94,7 @@ async def iam_error(ctx,error):
 @bot.command()
 @commands.check(lambda ctx: ctx.channel.id == config.ROLES_CHANNEL)
 async def iamnot(ctx, *, role: discord.Role):
+    """ Remove a role (only in #roles)"""
     #Check if the role exists
     guild = ctx.guild
     role_obj = discord.utils.get(guild.roles, name=role.name)
@@ -114,6 +116,9 @@ async def iamnot_error(ctx,error):
 
 @bot.command(aliases=["lsar"])
 async def roles(ctx):
+    """ 
+    Display all the available roles
+    """
     message = "These are the current roles that you can assign:"
     message += "\n**Character roles:**\n- "
     message += "\n- ".join(config.CHARACTER_ROLES)
@@ -123,6 +128,15 @@ async def roles(ctx):
     message += "\n- ".join(config.PLATFORM_ROLES)
     message += "\n**Misc roles:**\n- "
     message += "\n- ".join(config.MISC_ROLES)
+    await ctx.channel.send(message)
+
+@bot.command()
+async def about(ctx):
+    """ Introduces the bot """
+    alisa_happy = discord.utils.get(bot.emojis, name="Alisa_Happy")
+    if alisa_happy == None:
+        alisa_happy = ""
+    message = f"Hello I'm Alisa Bosconovitch nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but you'll figure out what I keep an eye out for over time.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down please contact the staff :)"
     await ctx.channel.send(message)
 
 
