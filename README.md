@@ -7,14 +7,14 @@ Welcome to the repository for the Alisa Discord bot. Due to having lost the prev
 ## Features
 
 - Can connect to Discord's developer bot service
-- Responds to a "ping" command in chat
+- Appointing/removing roles by standard members
+- Alisa responses in chat
+- Error handling
 
 
 ## Planned Features
-- Appointing/removing roles by standard members
 - Admin/mod chat tools to change role handling
-- Error handling
-- Alisa responses in chat
+
 ## Installation
 
 Alisa bot uses the Discord.py API wrapper.
