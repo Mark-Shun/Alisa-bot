@@ -1,13 +1,17 @@
 # Written by Mark-Shun(Sonicfreak)
 import discord
 import logging
-import requests
 
 import config
 from responses import Responses
 from discord.ext import commands
 
-handler = logging.FileHandler(filename='alisa.log', encoding='utf-8', mode='w')
+# Logger that outputs to alisa.log with basic info and ERROR messages
+logger = logging.basicConfig(filename='alisa.log', 
+                             level=logging.ERROR,
+                             format='%(asctime)s %(levelname)s: %(message)s',
+                             datefmt='%Y-%m-%d %H:%M:%S',
+                             filemode='a')
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -43,13 +47,13 @@ class Alisa(commands.Bot):
         print(f'{bot_name} is now awake.')
 
 
-bot = Alisa(command_prefix=config.PREFIX, intents=intents, log_handler=handler)
+bot = Alisa(command_prefix=config.PREFIX, intents=intents, log_file='alisa.log')
 
 # Error handler
-@bot.event
-async def on_command_error(ctx,error):
-    if isinstance(error, commands.CommandNotFound):
-        await ctx.reply(f"That command is not recognized, use {config.PREFIX}help for guidance.", mention_author=True)
+#@bot.event
+#async def on_command_error(ctx,error):
+#    if isinstance(error, commands.CommandNotFound):
+#        await ctx.reply(f"That command is not recognized, use {config.PREFIX}help for guidance.", mention_author=True)
 
 # Role management
 @bot.command(aliases=["am"])
