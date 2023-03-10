@@ -1,7 +1,7 @@
 # Don't share these ids publicly
 
 # Standard Alisa bot
-MTA4MzEyMjQ1ODkxMzEoNDg4Mw.GEMLoM.u3Y1c9bcuMlxOB-lcX_HQ9tUyeNPsmojOsud_M
+MTA4MzEyMjQ1ODkxMzE0NDg4Mw.Gb6MqV.XWf2KjP-3Sj75QIjMX9W_3SkJoWZ11-q5ZhV78
 
 # Testing Alisa bot
 MTA4MzM5NjE1NDQ2Njc2Mjc4Mg.GRQMjk.maxDv79YYhsIY6nnytvwodrxLnUqcEXipTOF0s
