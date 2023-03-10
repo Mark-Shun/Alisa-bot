@@ -52,7 +52,7 @@ async def on_command_error(ctx,error):
         await ctx.reply(f"That command is not recognized, use {config.PREFIX}help for guidance.", mention_author=True)
 
 # Role management
-@bot.command()
+@bot.command(aliases=["am"])
 @commands.check(lambda ctx: ctx.channel.id == config.ROLES_CHANNEL)
 async def iam(ctx, *, role: discord.Role):
     #Check if the role exists
@@ -90,7 +90,7 @@ async def iam_error(ctx,error):
     if isinstance(error, commands.RoleNotFound):
         await ctx.send(f"Excuse me, but that role does not exist.")
 
-@bot.command()
+@bot.command(aliases=["imnot"])
 @commands.check(lambda ctx: ctx.channel.id == config.ROLES_CHANNEL)
 async def iamnot(ctx, *, role: discord.Role):
     #Check if the role exists
