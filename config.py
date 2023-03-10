@@ -10,7 +10,7 @@ MISC_ROLES = ["Guest", "Streamer"]
 VALID_ROLES = CHARACTER_ROLES + REGION_ROLES + PLATFORM_ROLES + MISC_ROLES
 
 # This is the ID for the roles channel, this is used to check if the role commands are used in the right channel
-ROLES_CHANNEL = 1083761874979532901
+ROLES_CHANNEL = 352128965827231755
 
-# This is the ID of the guilder (server)
-GUILD_ID = 427866625899888640
+# This is the ID of the guild (server)
+GUILD_ID = 352127467223384076
