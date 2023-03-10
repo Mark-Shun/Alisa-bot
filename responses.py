@@ -27,5 +27,7 @@ class Responses:
             await message.channel.send(self.arisa)
         if "alisa is low tier" in p_message or "alisa is bottom tier" in p_message:
             await message.channel.send(self.alisa_cry)
+        if "alisa bible" == p_message:
+            await message.channel.send("Find the Alisa Bible here: https://docs.google.com/document/d/1hntdSiK3CBprurfSRCm5mKmc7hsGxBwA2ILQZBX2l8Y/edit?usp=sharing")
         
         
