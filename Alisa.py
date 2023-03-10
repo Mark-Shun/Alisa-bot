@@ -4,6 +4,7 @@ import logging
 import requests
 
 import config
+from responses import Responses
 from discord.ext import commands
 
 handler = logging.FileHandler(filename='alisa.log', encoding='utf-8', mode='w')
@@ -28,16 +29,19 @@ def is_valid_role(role):
 class Alisa(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.responses = None
         self.guild = None
         self.alisa_main = None
         self.alisa_sub = None
 
     async def on_ready(self):
+        self.responses = Responses(self)
         bot_name = (str(self.user)[0:-5])
-        print(f'{bot_name} is now awake.')
         self.guild = bot.get_guild(config.GUILD_ID)
         self.alisa_main = discord.utils.get(self.guild.roles, name="Alisa Main")
         self.alisa_sub = discord.utils.get(self.guild.roles, name="Alisa Sub")
+        print(f'{bot_name} is now awake.')
+
 
 bot = Alisa(command_prefix=config.PREFIX, intents=intents, log_handler=handler)
 
@@ -132,7 +136,6 @@ async def on_message(message):
     if message.content.startswith(config.PREFIX):
         return # Ignore messages that start with the command prefix
 
-    if message.content.startswith('hello'):
-        await message.reply('Hi there!', mention_author=True)
+    await bot.responses.handle_message(message)
 
 bot.run(config.MAIN_TOKEN)
