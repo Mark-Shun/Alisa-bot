@@ -1,6 +1,7 @@
 # Written by Mark-Shun(Sonicfreak)
 import discord
 import logging
+import warnings
 
 import config
 from responses import Responses
@@ -39,6 +40,12 @@ class Alisa(commands.Bot):
         self.alisa_sub = None
 
     async def on_ready(self):
+        # Checks if bot is being run on the Alisa server. For developing/testing change DEV in config.
+        if(not(config.DEV)):
+            if bot.guilds[0].id != config.Alisa_Server_ID:
+                warnings.warn("NOTE: This bot is currently not executing on the Alisa server. \nClosing Alisa")
+                await bot.close()
+                exit()
         self.responses = Responses(self)
         bot_name = (str(self.user)[0:-5])
         self.guild = bot.get_guild(config.GUILD_ID)
@@ -50,10 +57,10 @@ class Alisa(commands.Bot):
 bot = Alisa(command_prefix=config.PREFIX, intents=intents, log_file='alisa.log')
 
 # Error handler
-#@bot.event
-#async def on_command_error(ctx,error):
-#    if isinstance(error, commands.CommandNotFound):
-#        await ctx.reply(f"That command is not recognized, use {config.PREFIX}help for guidance.", mention_author=True)
+@bot.event
+async def on_command_error(ctx,error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.reply(f"That command is not recognized, use {config.PREFIX}help for guidance.", mention_author=True)
 
 # Role management
 @bot.command(aliases=["am"])
