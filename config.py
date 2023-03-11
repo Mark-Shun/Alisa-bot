@@ -1,4 +1,4 @@
-DEV = True
+DEV = False
 if DEV:
     MAIN_TOKEN = 'MTA4MzM5NjE1NDQ2Njc2Mjc4Mg.GRQMjk.maxDv79YYhsIY6nnytvwodrxLnUqcEXipTOF0s'
 else:
