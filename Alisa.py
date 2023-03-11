@@ -4,6 +4,7 @@ import logging
 import warnings
 import requests
 import asyncio
+import aiohttp
 
 import config
 from responses import Responses
@@ -23,13 +24,14 @@ intents.members = True
 bot_name = ''
 
 # Function to check if connection to specified url can be made
-def check_internet(retry):
+async def check_internet(retry):
     url = 'https://www.google.com/'
     warnings.warn(f"Retrying to establish connection: [{retry}]")
     try:
-        requests.get(url)
-        return True
-    except requests.exceptions.ConnectionError:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as response:
+                return response.status == 200
+    except aiohttp.ClientConnectionError:
         return False
 
 # Decorator to check if a command is executed in the right channel
