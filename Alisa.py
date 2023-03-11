@@ -5,6 +5,7 @@ import warnings
 import requests
 import asyncio
 import aiohttp
+import sys
 
 import config
 from responses import Responses
@@ -61,7 +62,7 @@ class Alisa(commands.Bot):
             if bot.guilds[0].id != config.Alisa_Server_ID:
                 warnings.warn("NOTE: This bot is currently not executing on the Alisa server. \nClosing Alisa")
                 await bot.close()
-                exit()
+                sys.exit(0)
         self.responses = Responses(self)
         self.openai = OpenAI(self)
         bot_name = (str(self.user)[0:-5])
