@@ -18,7 +18,7 @@ class Responses:
 
     async def handle_message(self, message):
         p_message = message.content.lower()
-        if "alisa is c tier" in p_message:
+        if "alisa is c tier" in p_message or "c tier" in p_message:
             await message.channel.send(f'So true! {self.alisa_notes}')
         if "alisa dance" == p_message:
             await message.channel.send(self.alisa_dancing)
