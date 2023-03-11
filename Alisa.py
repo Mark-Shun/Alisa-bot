@@ -1,7 +1,9 @@
-# Written by Mark-Shun(Sonicfreak)
+# Written by Mark-Shun(Sonicfreak) for the Alisa Discord server.
 import discord
 import logging
 import warnings
+import requests
+import asyncio
 
 import config
 from responses import Responses
@@ -19,6 +21,15 @@ intents.message_content = True
 intents.members = True
 
 bot_name = ''
+
+def check_internet(retry):
+    url = 'https://www.google.com/'
+    warnings.warn(f"Retrying to establish connection: [{retry}]")
+    try:
+        requests.get(url)
+        return True
+    except requests.exceptions.ConnectionError:
+        return False
 
 # Decorator to check if a command is executed in the right channel
 def in_allowed_channel(ctx):
@@ -125,6 +136,7 @@ async def iamnot_error(ctx,error):
     if isinstance(error, commands.RoleNotFound):
         await ctx.send(f"Excuse me, but that role does not exist.")
 
+# Displays all the roles
 @bot.command(aliases=["lsar"])
 async def roles(ctx):
     """ 
@@ -141,6 +153,7 @@ async def roles(ctx):
     message += "\n- ".join(config.MISC_ROLES)
     await ctx.channel.send(message)
 
+# Prints an about message
 @bot.command()
 async def about(ctx):
     """ Introduces the bot """
@@ -162,5 +175,19 @@ async def on_message(message):
         return # Ignore messages that start with the command prefix
 
     await bot.responses.handle_message(message)
+
+@bot.event
+async def on_disconnect():
+    warnings.warn("Oh oh, connection has been lost.")
+    retry = 0
+    while True:
+        if await check_internet(retry):
+            # Internet is back, reconnecting to Discord
+            warnings.warn("Connection established, connecting to Discord.")
+            await bot.login(config.MAIN_TOKEN)
+            await bot.connect()
+            break
+        await asyncio.sleep(300) # wait for 5 minutes
+        retry += 1
 
 bot.run(config.MAIN_TOKEN)
