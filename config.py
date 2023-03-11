@@ -6,6 +6,7 @@ else:
 
 CHAT_KEY = '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'
 PREFIX = '.'
+WORD_LIMIT = 200
 
 CHARACTER_ROLES = ["Alisa Main", "Alisa Sub"]
 REGION_ROLES = ["NA-EAST", "NA-WEST", "EU-EAST", "EU-WEST", "OCE", "EAST-ASIA", "SEA", "MEA"]
