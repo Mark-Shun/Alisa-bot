@@ -2,7 +2,7 @@ import os
 import warnings
 import sys
 
-DEV = True
+DEV = False
 if DEV:
     if 'ALISA_TEST_BOT_TOKEN' not in os.environ:
         warnings.warn("Environment variable ALISA_TEST_BOT_TOKEN not found. The bot will be closed down.")
