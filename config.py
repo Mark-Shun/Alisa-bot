@@ -1,10 +1,25 @@
+import os
+import warnings
+import sys
+
 DEV = True
 if DEV:
-    MAIN_TOKEN = 'MTA4MzM5NjE1NDQ2Njc2Mjc4Mg.GRQMjk.maxDv79YYhsIY6nnytvwodrxLnUqcEXipTOF0s'
+    if 'ALISA_TEST_BOT_TOKEN' not in os.environ:
+        warnings.warn("Environment variable ALISA_TEST_BOT_TOKEN not found. The bot will be closed down.")
+        sys.exit(0)
+    MAIN_TOKEN = os.environ.get('ALISA_TEST_BOT_TOKEN')
 else:
-    MAIN_TOKEN = 'MTA4MzEyMjQ1ODkxMzE0NDg4Mw.Gb6MqV.XWf2KjP-3Sj75QIjMX9W_3SkJoWZ11-q5ZhV78'
+    if 'ALISA_BOT_TOKEN' not in os.environ:
+        warnings.warn("Environment variable ALISA_BOT_TOKEN not found. The bot will be closed down.")
+        sys.exit(0)
+    MAIN_TOKEN = os.environ.get('ALISA_BOT_TOKEN')
 
-CHAT_KEY = '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'
+if 'OPENAI_ALISA_KEY' not in os.environ:
+    warnings.warn("Environment variable OPENAI_ALISA_KEY not found. The bot will be closed down.")
+    sys.exit(0)
+CHAT_KEY = os.environ.get('OPENAI_ALISA_KEY')
+
+
 PREFIX = '.'
 WORD_LIMIT = 200
 
@@ -23,9 +38,9 @@ if DEV:
 else:
     # This is the ID for the roles channel, this is used to check if the role commands are used in the right channel
     ROLES_CHANNEL = 352128965827231755
-    # This is the ID of the guild (server)
+    # This is the ID of the Alisa server guild (server)
     GUILD_ID = 352127467223384076
 
 Alisa_Server_ID = 352127467223384076
 
-RECONNECTION_TIME = 300
+RECONNECTION_TIME = 300 #Wait 5 minutes
