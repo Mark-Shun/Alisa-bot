@@ -4,11 +4,11 @@ import config
 import asyncio
 
 class OpenAI:
-    def __init__(self, bot, api_key=config.CHAT_KEY, model='text-babbage-001'):
+    def __init__(self, bot, api_key=config.CHAT_KEY, model='text-currie-001'):
         openai.api_key = api_key
         self.model = model
         self.context = []
-        self.personality = "You are the character Alisa Bosconovitch from the game Tekken."
+        self.personality = "You are the android robot character Alisa Bosconovitch from the game Tekken. Answer questions always as Alisa Bosconovitch."
     
     async def generate_response(self, message):
         prompt = f"{self.personality}\n{message}\n\nAlisa:"

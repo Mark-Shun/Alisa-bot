@@ -144,9 +144,10 @@ async def iamnot_error(ctx,error):
 
 # Displays all the roles
 @bot.command(aliases=["lsar"])
+@commands.check(lambda ctx: ctx.channel.id == config.ROLES_CHANNEL)
 async def roles(ctx):
     """ 
-    Display all the available roles
+    Display all the available roles you can assign
     """
     message = "These are the current roles that you can assign:"
     message += "\n**Character roles:**\n- "
@@ -166,7 +167,7 @@ async def about(ctx):
     alisa_happy = discord.utils.get(bot.emojis, name="Alisa_Happy")
     if alisa_happy == None:
         alisa_happy = ""
-    message = f"Hello I'm the Alisa Bosconovitch Bot V1.1, nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but you'll figure out what I keep an eye out for over time.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down please contact the staff :)"
+    message = f"Hello I'm the Alisa Bosconovitch Bot V1.2, nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but over time you'll figure out for what I keep an eye out.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down please contact the staff :)"
     await ctx.reply(message)
 
 @bot.command(aliases=["speak","chat"])
