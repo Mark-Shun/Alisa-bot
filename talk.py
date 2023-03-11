@@ -4,7 +4,7 @@ import config
 import asyncio
 
 class OpenAI:
-    def __init__(self, bot, api_key=config.CHAT_KEY, model='text-currie-001'):
+    def __init__(self, bot, api_key=config.CHAT_KEY, model="text-curie-001"):
         openai.api_key = api_key
         self.model = model
         self.context = []
@@ -21,5 +21,6 @@ class OpenAI:
             temperature=0.7,
             presence_penalty=0.6,
             frequency_penalty=0.6,
+            timeout=20
         )
         return response.choices[0].text.strip()
