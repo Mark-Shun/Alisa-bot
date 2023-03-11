@@ -12,6 +12,8 @@ class Responses:
         self.alisa_cry = discord.utils.get(self.bot.emojis, name="alisacry")
         self.heart = discord.utils.get(self.bot.emojis, name="Heart")
         self.alisa_happy = discord.utils.get(self.bot.emojis, name="Alisa_Happy")
+        self.alisa_stronk = discord.utils.get(self.bot.emojis, name="Alisa_Stronk")
+        self.alisus = discord.utils.get(self.bot.emojis, name="alisus")
 
 
     async def handle_message(self, message):
@@ -34,5 +36,11 @@ class Responses:
             await message.channel.send(self.heart)
         if "i love alisa" == p_message:
             await message.reply(f'I love you too {self.alisa_happy}')
+        if "nerf alisa" == p_message:
+            await message.reply(self.alisa_pout)
+        if "buff alisa" in p_message:
+            await message.reply(self.alisa_stronk)
+        if "nsfw alisa" in p_message:
+            await message.reply(self.alisus)
         
         
