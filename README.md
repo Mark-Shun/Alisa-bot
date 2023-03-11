@@ -10,6 +10,7 @@ Welcome to the repository for the Alisa Discord bot. Due to having lost the prev
 - Appointing/removing roles by standard members
 - Alisa responses in chat
 - Error handling
+- Interface with chatGPT API for chatting
 
 
 ## Planned Features
@@ -19,6 +20,7 @@ Welcome to the repository for the Alisa Discord bot. Due to having lost the prev
 
 Alisa bot uses the Discord.py API wrapper.
 Due to this to run Alisa bot you need two things: python3 and discord.py
+Besides that for the chatting feature the bot also used the openAI library
 
 ```bash
   install python
@@ -29,6 +31,7 @@ Go into the desired terminal (e.x: command prompt)
 
 ```bash
   pip install discord.py
+  pip install openai
 ```
     
 ## Run Locally
@@ -51,6 +54,9 @@ Run the Alisa bot (note: make sure that Python3 is run, some terminals require e
   python Alisa.py
 ```
 
+## Configuration
+Configuration is done in the config.py file, tokens, keys and variables can be found here.
+When developing it's important to change the DEV variable to True. And when running the bot normally to set it to False.
 
 ## Appendix
 While tiny in scope, I hope it will be useful for the Discord server.

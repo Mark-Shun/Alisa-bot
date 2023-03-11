@@ -4,6 +4,7 @@ if DEV:
 else:
     MAIN_TOKEN = 'MTA4MzEyMjQ1ODkxMzE0NDg4Mw.Gb6MqV.XWf2KjP-3Sj75QIjMX9W_3SkJoWZ11-q5ZhV78'
 
+CHAT_KEY = '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'
 PREFIX = '.'
 
 CHARACTER_ROLES = ["Alisa Main", "Alisa Sub"]

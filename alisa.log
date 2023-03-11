@@ -2,3 +2,100 @@
 2023-03-11 00:08:04 INFO: Shard ID None has connected to Gateway (Session ID: af8b433a55edc8e5e481194142180929).
 2023-03-11 00:10:01 INFO: logging in using static token
 2023-03-11 00:10:02 INFO: Shard ID None has connected to Gateway (Session ID: 4f4a6d9b3b410a94d98504f9ac52d65f).
+2023-03-11 12:01:34 INFO: logging in using static token
+2023-03-11 12:01:35 INFO: Shard ID None has connected to Gateway (Session ID: 899f45639b9bc6e2600c50cd0ad7df88).
+2023-03-11 12:25:17 ERROR: Ignoring exception in on_disconnect
+Traceback (most recent call last):
+  File "C:\Users\marks\AppData\Local\Programs\Python\Python310\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "D:\Programming\Alisa_bot\Alisa.py", line 185, in on_disconnect
+    if await check_internet(retry):
+TypeError: object bool can't be used in 'await' expression
+2023-03-11 12:25:17 INFO: Shard ID None has successfully RESUMED session 899f45639b9bc6e2600c50cd0ad7df88.
+2023-03-11 13:19:30 INFO: logging in using static token
+2023-03-11 13:19:31 INFO: Shard ID None has connected to Gateway (Session ID: 0217b57b7db3c379197fb4df89fd9e81).
+2023-03-11 13:24:37 INFO: logging in using static token
+2023-03-11 13:24:38 INFO: Shard ID None has connected to Gateway (Session ID: 526ddc01631ffebf61db1cb197f197d9).
+2023-03-11 13:26:24 INFO: logging in using static token
+2023-03-11 13:26:25 INFO: Shard ID None has connected to Gateway (Session ID: d407e4e78c7a9313414cff1b63df2120).
+2023-03-11 13:32:47 INFO: logging in using static token
+2023-03-11 13:32:48 INFO: Shard ID None has connected to Gateway (Session ID: 9ec6a03467b607a779370bc647b8d132).
+2023-03-11 13:35:26 INFO: logging in using static token
+2023-03-11 13:35:27 INFO: Shard ID None has connected to Gateway (Session ID: 1d927aaca9f8be28b55da0ceb601a918).
+2023-03-11 13:37:07 INFO: logging in using static token
+2023-03-11 13:37:08 INFO: Shard ID None has connected to Gateway (Session ID: 828a1c8eaa5e72a4144eb6f1d631af7c).
+2023-03-11 13:39:18 INFO: logging in using static token
+2023-03-11 13:39:19 INFO: Shard ID None has connected to Gateway (Session ID: dfe95af44cd480cf4568c5536bd34a86).
+2023-03-11 13:39:49 INFO: logging in using static token
+2023-03-11 13:39:49 INFO: Shard ID None has connected to Gateway (Session ID: 1ca2273bb603cad3c1dde4946c51049c).
+2023-03-11 13:41:01 INFO: logging in using static token
+2023-03-11 13:41:02 INFO: Shard ID None has connected to Gateway (Session ID: 1bd6e734dc897440716132a462917fe2).
+2023-03-11 13:48:02 INFO: logging in using static token
+2023-03-11 13:48:03 INFO: Shard ID None has connected to Gateway (Session ID: db937ccde8e08b0623556247809e8bbd).
+2023-03-11 13:52:06 INFO: logging in using static token
+2023-03-11 13:52:07 INFO: Shard ID None has connected to Gateway (Session ID: e2b53523ce35ffbe75e18bc19dafbff6).
+2023-03-11 13:53:52 INFO: logging in using static token
+2023-03-11 13:53:53 INFO: Shard ID None has connected to Gateway (Session ID: 417e3aa46e3aa0aa56038c3f1219e63c).
+2023-03-11 13:54:36 INFO: logging in using static token
+2023-03-11 13:54:37 INFO: Shard ID None has connected to Gateway (Session ID: 279fc529bf856ef8658f69f236649593).
+2023-03-11 13:55:36 INFO: logging in using static token
+2023-03-11 13:55:37 INFO: Shard ID None has connected to Gateway (Session ID: 57dfcb5b87a5c87f823294e928ea35d0).
+2023-03-11 14:00:17 INFO: logging in using static token
+2023-03-11 14:00:18 INFO: Shard ID None has connected to Gateway (Session ID: 2522a7bf0846b958b39ee87f62fd4b4f).
+2023-03-11 14:12:34 INFO: logging in using static token
+2023-03-11 14:12:35 INFO: Shard ID None has connected to Gateway (Session ID: 4b8b4ff87dcb31fe48e736496fde2976).
+2023-03-11 14:12:37 ERROR: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "C:\Users\marks\AppData\Local\Programs\Python\Python310\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "D:\Programming\Alisa_bot\Alisa.py", line 66, in on_ready
+    self.openai = OpenAI(self)
+  File "D:\Programming\Alisa_bot\talk.py", line 12, in __init__
+    self.initialize_personality()
+  File "D:\Programming\Alisa_bot\talk.py", line 17, in initialize_personality
+    response = openai.Completion.create(
+  File "C:\Users\marks\AppData\Local\Programs\Python\Python310\lib\site-packages\openai\api_resources\completion.py", line 25, in create
+    return super().create(*args, **kwargs)
+  File "C:\Users\marks\AppData\Local\Programs\Python\Python310\lib\site-packages\openai\api_resources\abstract\engine_api_resource.py", line 153, in create
+    response, _, api_key = requestor.request(
+  File "C:\Users\marks\AppData\Local\Programs\Python\Python310\lib\site-packages\openai\api_requestor.py", line 226, in request
+    resp, got_stream = self._interpret_response(result, stream)
+  File "C:\Users\marks\AppData\Local\Programs\Python\Python310\lib\site-packages\openai\api_requestor.py", line 619, in _interpret_response
+    self._interpret_response_line(
+  File "C:\Users\marks\AppData\Local\Programs\Python\Python310\lib\site-packages\openai\api_requestor.py", line 682, in _interpret_response_line
+    raise self.handle_error_response(
+openai.error.InvalidRequestError: Unrecognized request argument supplied: context
+2023-03-11 14:13:36 INFO: logging in using static token
+2023-03-11 14:13:37 INFO: Shard ID None has connected to Gateway (Session ID: 4e7d46a432458dff0f15c7719d806c6b).
+2023-03-11 14:13:40 ERROR: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "C:\Users\marks\AppData\Local\Programs\Python\Python310\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "D:\Programming\Alisa_bot\Alisa.py", line 66, in on_ready
+    self.openai = OpenAI(self)
+  File "D:\Programming\Alisa_bot\talk.py", line 12, in __init__
+    self.initialize_personality()
+  File "D:\Programming\Alisa_bot\talk.py", line 29, in initialize_personality
+    context = context.append(self.personality)
+UnboundLocalError: local variable 'context' referenced before assignment
+2023-03-11 14:15:04 INFO: logging in using static token
+2023-03-11 14:15:05 INFO: Shard ID None has connected to Gateway (Session ID: 680f7ae1d26b5042f685217a85191798).
+2023-03-11 14:15:08 ERROR: Ignoring exception in on_ready
+Traceback (most recent call last):
+  File "C:\Users\marks\AppData\Local\Programs\Python\Python310\lib\site-packages\discord\client.py", line 441, in _run_event
+    await coro(*args, **kwargs)
+  File "D:\Programming\Alisa_bot\Alisa.py", line 66, in on_ready
+    self.openai = OpenAI(self)
+  File "D:\Programming\Alisa_bot\talk.py", line 12, in __init__
+    self.initialize_personality()
+  File "D:\Programming\Alisa_bot\talk.py", line 30, in initialize_personality
+    self.context = self.context.append(AI_response)
+AttributeError: 'NoneType' object has no attribute 'append'
+2023-03-11 14:17:44 INFO: logging in using static token
+2023-03-11 14:17:45 INFO: Shard ID None has connected to Gateway (Session ID: be7f245236c6cb6e913d301d4a6d62f4).
+2023-03-11 14:21:44 INFO: logging in using static token
+2023-03-11 14:21:44 INFO: Shard ID None has connected to Gateway (Session ID: e1227e695555577efcbb9116c2900d51).
+2023-03-11 14:30:39 INFO: logging in using static token
+2023-03-11 14:30:40 INFO: Shard ID None has connected to Gateway (Session ID: 8afbc860ede1c6643838a57efe6b14a5).
+2023-03-11 14:32:11 INFO: logging in using static token
+2023-03-11 14:32:12 INFO: Shard ID None has connected to Gateway (Session ID: 400cf2647c42ae8af2dfdfa1460d219e).

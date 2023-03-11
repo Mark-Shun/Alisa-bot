@@ -8,6 +8,7 @@ import aiohttp
 
 import config
 from responses import Responses
+from talk import OpenAI
 from discord.ext import commands
 
 # Logger that outputs to alisa.log with basic info and ERROR messages
@@ -49,6 +50,7 @@ class Alisa(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.responses = None
+        self.openai = None
         self.guild = None
         self.alisa_main = None
         self.alisa_sub = None
@@ -61,6 +63,7 @@ class Alisa(commands.Bot):
                 await bot.close()
                 exit()
         self.responses = Responses(self)
+        self.openai = OpenAI(self)
         bot_name = (str(self.user)[0:-5])
         self.guild = bot.get_guild(config.GUILD_ID)
         self.alisa_main = discord.utils.get(self.guild.roles, name="Alisa Main")
@@ -163,9 +166,16 @@ async def about(ctx):
     alisa_happy = discord.utils.get(bot.emojis, name="Alisa_Happy")
     if alisa_happy == None:
         alisa_happy = ""
-    message = f"Hello I'm Alisa Bosconovitch nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but you'll figure out what I keep an eye out for over time.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down please contact the staff :)"
-    await ctx.channel.send(message)
+    message = f"Hello I'm the Alisa Bosconovitch Bot V1.1, nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but you'll figure out what I keep an eye out for over time.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down please contact the staff :)"
+    await ctx.reply(message)
 
+@bot.command(aliases=["speak","chat"])
+async def talk(ctx, *, message):
+    """ Use AI to talk with the bot. (Limited use) """
+    print(f"Sending {message} to AI")
+    response = await bot.openai.generate_response(message)
+    print(f"Got response: {response}")
+    await ctx.reply(str(response), mention_author = True)
 
 # Replying to defined messages
 @bot.event
