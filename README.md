@@ -1,8 +1,8 @@
 
-![Alisa sleeping](./images/Arisa.png?raw=true "Title")
+![Alisa Sleepers Image](./images/AlisaSleepers.png?raw=true "Title")
 # Alisa Discord Bot
 
-Welcome to the repository for the Alisa Discord bot. Due to having lost the previous iteration of the bot, and discovering that it doesn't compile/run on some IoT devices (Raspberry Pi) in this case, I decided to start this little project.
+Welcome to the repository for the Alisa Discord bot. Due to having lost the previous iteration of the bot, and discovering that it doesn't compile/run on some IoT devices (Raspberry Pi in this case), I decided to start this little project.
 
 ## Features
 
@@ -53,6 +53,14 @@ Run the Alisa bot (note: make sure that Python3 is run, some terminals require e
 ```bash
   python Alisa.py
 ```
+
+## Environment
+The code uses tokens for two bots, namely the main Alisa bot and a testing bot.
+Besides that a key for openAI's API is also used.
+To get these tokens and key the script retrieves them from the system environment. Make sure they're stored in the environment with the following variable names:
+- ALISA_BOT_TOKEN
+- ALISA_TEST_BOT_TOKEN
+- OPENAI_ALISA_KEY
 
 ## Configuration
 Configuration is done in the config.py file, tokens, keys and variables can be found here.
