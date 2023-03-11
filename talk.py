@@ -15,7 +15,7 @@ class OpenAI:
         response = openai.Completion.create(
             engine=self.model,
             prompt=prompt,
-            max_tokens=1024,
+            max_tokens=500,
             n=1,
             stop=None,
             temperature=0.7,
