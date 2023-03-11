@@ -22,6 +22,7 @@ intents.members = True
 
 bot_name = ''
 
+# Function to check if connection to specified url can be made
 def check_internet(retry):
     url = 'https://www.google.com/'
     warnings.warn(f"Retrying to establish connection: [{retry}]")
@@ -187,7 +188,7 @@ async def on_disconnect():
             await bot.login(config.MAIN_TOKEN)
             await bot.connect()
             break
-        await asyncio.sleep(300) # wait for 5 minutes
+        await asyncio.sleep(config.RECONNECTION_TIME)
         retry += 1
 
 bot.run(config.MAIN_TOKEN)
