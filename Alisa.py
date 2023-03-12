@@ -192,19 +192,22 @@ async def on_message(message):
 
     await bot.responses.handle_message(message)
 
+# Incase a disconnection event has occured, execute the following code.
+disconnect_lock = asyncio.Lock()
 @bot.event
 async def on_disconnect():
     warnings.warn("Oh oh, connection has been lost.")
-    retry = 0
-    while True:
-        if await check_internet(retry):
-            # Internet is back, reconnecting to Discord
-            warnings.warn("Connection established, connecting to Discord.")
-            await bot.login(config.MAIN_TOKEN)
-            await bot.connect()
-            break
-        await asyncio.sleep(config.RECONNECTION_TIME)
-        retry += 1
+    async with disconnect_lock:
+        retry = 0
+        while True:
+            if await check_internet(retry):
+                # Internet is back, reconnecting to Discord
+                warnings.warn("Connection established, connecting to Discord.")
+                await bot.login(config.MAIN_TOKEN)
+                await bot.connect()
+                break
+            await asyncio.sleep(config.RECONNECTION_TIME)
+            retry += 1
 
 
 bot.run(config.MAIN_TOKEN)
