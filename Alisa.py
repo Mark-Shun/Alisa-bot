@@ -185,34 +185,4 @@ async def on_message(message):
     # Send message to the handle_message function to check and respond to
     await bot.responses.handle_message(message)
 
-# Function to check if connection to specified url can be made
-async def check_internet(retry):
-    url = 'https://www.google.com/'
-    warnings.warn(f"Retrying to establish connection: [{retry}]")
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url) as response:
-                return response.status == 200
-    except aiohttp.ClientConnectionError:
-        return False
-
-# Function to attempt to reconnect to Discord in case of a disconnection event
-async def reconnect():
-    warnings.warn("Oh oh, connection has been lost.")
-    retry = 0
-    while True:
-        if await check_internet(retry):
-            # Internet is back, reconnecting to Discord
-            warnings.warn("Connection established, connecting to Discord.")
-            await bot.login(config.MAIN_TOKEN)
-            await bot.connect()
-            break
-        await asyncio.sleep(config.RECONNECTION_TIME)
-        retry += 1
-
-# Event handler for when the bot is disconnected from Discord
-@bot.event
-async def on_disconnect():
-    asyncio.create_task(reconnect())
-
 bot.run(config.MAIN_TOKEN)
