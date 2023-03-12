@@ -2,9 +2,6 @@
 import discord
 import logging
 import warnings
-import requests
-import asyncio
-import aiohttp
 import sys
 
 import config
