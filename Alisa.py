@@ -9,6 +9,12 @@ from responses import Responses
 from talk import OpenAI
 from discord.ext import commands
 
+# Check if the passed argument is dev or not to set the dev environment in config
+if len(sys.argv) > 1 and sys.argv[1].lower() == 'dev':
+    config.setup(True)
+else:
+    config.setup(False)
+
 # Logger that outputs to alisa.log with basic info and ERROR messages
 logger = logging.basicConfig(filename='alisa.log', 
                              level=logging.ERROR,
