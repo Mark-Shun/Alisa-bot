@@ -210,4 +210,9 @@ async def reconnect():
         await asyncio.sleep(config.RECONNECTION_TIME)
         retry += 1
 
+# Event handler for when the bot is disconnected from Discord
+@bot.event
+async def on_disconnect():
+    asyncio.create_task(reconnect())
+
 bot.run(config.MAIN_TOKEN)
