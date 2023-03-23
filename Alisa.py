@@ -3,6 +3,7 @@ import discord
 import logging
 import warnings
 import sys
+import re
 
 import config
 from responses import Responses
@@ -70,6 +71,9 @@ bot = Alisa(command_prefix=config.PREFIX, intents=intents, log_file='alisa.log')
 @bot.event
 async def on_command_error(ctx,error):
     if isinstance(error, commands.CommandNotFound):
+        # A check to see if message should be interpreted as an command (message starts with a . followed by a letter)
+        if not re.match(r'^\.[a-zA-Z]', (ctx.message.content)):
+            return # The message does not start with a . followed by a letter
         await ctx.reply(f"That command is not recognized, use {config.PREFIX}help for guidance.", mention_author=True)
 
 # Role management
