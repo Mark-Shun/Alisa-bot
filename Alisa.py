@@ -172,12 +172,13 @@ async def about(ctx):
 
 @bot.command(aliases=["speak","chat"])
 async def talk(ctx, *, message):
-    """ Use AI to talk with the bot. (Limited use) """
-    if len(message.split()) > config.WORD_LIMIT:
-        await ctx.reply(f"Owh that's a bit much to compute, please keep your message under the {config.WORD_LIMIT} words size limit.")
-        return
-    response = await bot.openai.generate_response(message)
-    await ctx.reply(str(response), mention_author = True)
+    """ (Currently unavailable) """
+    await ctx.reply("Sorry that command is currently unavailable.")
+    #if len(message.split()) > config.WORD_LIMIT:
+    #    await ctx.reply(f"Owh that's a bit much to compute, please keep your message under the {config.WORD_LIMIT} words size limit.")
+    #    return
+    #response = await bot.openai.generate_response(message)
+    #await ctx.reply(str(response), mention_author = True)
 
 # Replying to defined messages
 @bot.event
