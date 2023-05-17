@@ -177,6 +177,10 @@ async def talk(ctx, *, message):
     #response = await bot.openai.generate_response(message)
     #await ctx.reply(str(response), mention_author = True)
 
+@bot.command(aliases=["mod"])
+async def admin(ctx):
+    """ Command for the staff to moderate the server """
+
 # Replying to defined messages
 @bot.event
 async def on_message(message):
