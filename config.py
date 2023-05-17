@@ -47,7 +47,7 @@ PREFIX = '.'
 WORD_LIMIT = 200
 
 CHARACTER_ROLES = ["Alisa Main", "Alisa Sub"]
-REGION_ROLES = ["NA-EAST", "NA-WEST", "EU-EAST", "EU-WEST", "OCE", "EAST-ASIA", "SEA", "MEA"]
+REGION_ROLES = ["NA-EAST", "NA-WEST", "EU-EAST", "EU-WEST", "OCE", "MEA", "EAST-ASIA", "SOUTH-ASIA", "SEA"]
 PLATFORM_ROLES = ["PC", "PS4", "XBOX"]
 MISC_ROLES = ["Guest", "Streamer"]
 
