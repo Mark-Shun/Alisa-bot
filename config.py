@@ -28,8 +28,7 @@ def setup(dev_arg):
         MAIN_TOKEN = os.environ.get('ALISA_BOT_TOKEN')
 
     if 'OPENAI_ALISA_KEY' not in os.environ:
-        warnings.warn("Environment variable OPENAI_ALISA_KEY not found. The bot will be closed down.")
-        sys.exit(0)
+        warnings.warn("Environment variable OPENAI_ALISA_KEY not found.")
     if DEV:
         # This is the ID for the test server roles channel, this is used to check if the role commands are used in the right channel
         ROLES_CHANNEL = 1083761874979532901
@@ -55,4 +54,4 @@ VALID_ROLES = CHARACTER_ROLES + REGION_ROLES + PLATFORM_ROLES + MISC_ROLES
 
 Alisa_Server_ID = 352127467223384076
 
-Welcome_Message = "Hello and welcome to the Alisa Discord server!"
+Welcome_Message = "*こんにちは！*\nWelcome to the Alisa Bosconovitch Discord server!\nI'm the Alisa bot and I hope you'll enjoy your stay.\nMake sure to take a look at the ***quick-start*** channel for the server rules, and to grab the roles you want over at the ***roles*** channel."

@@ -193,13 +193,22 @@ async def on_message(message):
     # Send message to the handle_message function to check and respond to
     await bot.responses.handle_message(message)
 
+@bot.event
 # Handling welcome message for new member
 async def on_member_join(member):
     try:
         await member.send(config.Welcome_Message)
     except discord.Forbidden:
         # The bot doesn't have permission to send DMs to the member
-        warnings.warn(f"Failed to send a welcome message to: {member.name}")
+        warnings.warn(f"Failed to send welcome message to: {member.name}")
+    try:
+        with open("./images/Arisa.png", 'rb') as arisa_picture:
+            picture = discord.File(arisa_picture)
+            await member.send(file=picture)
+    except FileNotFoundError:
+        warnings.warn(f"Picture: {arisa_picture.name} could not be found.")
+    except discord.errors.HTTPException:
+        warnings.warn(f"Failed to send {arisa_picture.name} picture.")
         
 
 bot.run(config.MAIN_TOKEN)
