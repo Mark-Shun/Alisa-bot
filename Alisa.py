@@ -193,4 +193,13 @@ async def on_message(message):
     # Send message to the handle_message function to check and respond to
     await bot.responses.handle_message(message)
 
+# Handling welcome message for new member
+async def on_member_join(member):
+    try:
+        await member.send(config.Welcome_Message)
+    except discord.Forbidden:
+        # The bot doesn't have permission to send DMs to the member
+        warnings.warn(f"Failed to send a welcome message to: {member.name}")
+        
+
 bot.run(config.MAIN_TOKEN)

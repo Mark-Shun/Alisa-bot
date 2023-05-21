@@ -54,3 +54,5 @@ MISC_ROLES = ["Guest", "Streamer"]
 VALID_ROLES = CHARACTER_ROLES + REGION_ROLES + PLATFORM_ROLES + MISC_ROLES
 
 Alisa_Server_ID = 352127467223384076
+
+Welcome_Message = "Hello and welcome to the Alisa Discord server!"
