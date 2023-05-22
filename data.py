@@ -20,7 +20,11 @@ class DataBase:
         self.roles_db.remove(self.query.role == role)
     def get_roles(self):
         return self.roles_db.all()
+    def search_category(self, category):
+        result = self.roles_db.search(self.query.category == category)
+        print(result)
 
 test_db = DataBase()
 
 test_db.try_out()
+test_db.search_category('ehm')
