@@ -59,11 +59,12 @@ class Alisa(commands.Bot):
                 await bot.close()
                 sys.exit(0)
         self.responses = Responses(self)
-        self.openai = OpenAI(self)
+        #self.openai = OpenAI(self)
         bot_name = (str(self.user)[0:-5])
         self.guild = bot.get_guild(config.GUILD_ID)
         self.alisa_main = discord.utils.get(self.guild.roles, name="Alisa Main")
         self.alisa_sub = discord.utils.get(self.guild.roles, name="Alisa Sub")
+        await bot.change_presence(activity=discord.Game(name="Tekken 7"))
         print(f'{bot_name} is now awake.')
 
 
