@@ -35,10 +35,12 @@ def in_allowed_channel(ctx):
 
 # Function to check if an asked role is the allowed list.
 def is_valid_role(role):
+    index = 0
     for i in config.VALID_ROLES:
-        if i == str(role):
-            return True
-    return False
+        if i.lower() == str(role.lower()):
+            return True, index
+        index += 1
+    return False, index
 
 class Alisa(commands.Bot):
     def __init__(self, *args, **kwargs):
@@ -79,18 +81,24 @@ async def on_command_error(ctx,error):
 # Role management
 @bot.command(aliases=["am"])
 @commands.check(lambda ctx: ctx.channel.id == config.ROLES_CHANNEL)
-async def iam(ctx, *, role: discord.Role):
+async def iam(ctx, *, role):
     """ Assign a role (only in #roles) """
     #Check if the role exists
+    role_name = role.lower()
+    if (role_name == "admin" or role_name == "moderator"):
+        await ctx.channel.send(f"Nice try. {bot.responses.alisa_laugh}")
+        return
     guild = ctx.guild
-    role_obj = discord.utils.get(guild.roles, name=role.name)
-    if role_obj is None:
-        await ctx.send(f"Excuse me, but the {role} role does not exist.")
-
-    if is_valid_role(role_obj):
+    # role_obj = discord.utils.get(guild.roles, name=role.name)
+    # if role_obj is None:
+    #     await ctx.send(f"Excuse me, but the {role} role does not exist.")
+    valid_result, index = is_valid_role(role_name)
+    if (valid_result == True):
+        role_obj = discord.utils.get(guild.roles, name=config.VALID_ROLES[index])
         if role_obj in ctx.author.roles:
-            await ctx.channel.send(f"You already have the {role_obj.name} role.")
+            await ctx.channel.send(f"You already have the role: {config.VALID_ROLES[index]}.")
         else:
+
             # Checking if character role gets changed, to eventually remove the other one
             if role_obj == bot.alisa_main:
                 opp_role = bot.alisa_sub
@@ -104,12 +112,12 @@ async def iam(ctx, *, role: discord.Role):
                 message = f"You now have the {role_obj.name} role!"
                 if opp_role and opp_role in ctx.author.roles:
                     await ctx.author.remove_roles(opp_role)
-                    message += f"\n And I removed the {opp_role.name} role."
+                    message += f"\nAnd I removed the {opp_role.name} role for you."
                 await ctx.channel.send(message)
             except discord.errors.Forbidden:
                 await ctx.send("I do not have permission to grant this role.")
     else:
-        await ctx.channel.send(f"Sorry, {role_obj.name} is not a valid role.")
+        await ctx.channel.send(f"Sorry, {role_name} is not a valid role.")
 
 @iam.error
 async def iam_error(ctx,error):
@@ -118,21 +126,24 @@ async def iam_error(ctx,error):
 
 @bot.command(aliases=["imnot"])
 @commands.check(lambda ctx: ctx.channel.id == config.ROLES_CHANNEL)
-async def iamnot(ctx, *, role: discord.Role):
+async def iamnot(ctx, *, role):
     """ Remove a role (only in #roles)"""
     #Check if the role exists
+    role_name = role.lower()
+    valid_result, index = is_valid_role(role_name)
+    if (valid_result == False):
+        await ctx.channel.send(f"Sorry, {role} is not a valid role to remove.")
+        return
     guild = ctx.guild
-    role_obj = discord.utils.get(guild.roles, name=role.name)
-    if role_obj is None:
-        await ctx.send(f"Excuse me, but the {role} role does not exist.")
-    if is_valid_role(role_obj):
-        if role_obj not in ctx.author.roles:
-            await ctx.channel.send(f"You don't have the {role_obj.name} role!")
-        else:
-            await ctx.author.remove_roles(role_obj)
-            await ctx.channel.send(f"You no longer have the {role_obj.name} role.")
+    role_obj = discord.utils.get(guild.roles, name=config.VALID_ROLES[index])
+    if role_obj not in ctx.author.roles:
+        await ctx.channel.send(f"You don't have the role{role_obj.name}!")
     else:
-        await ctx.channel.send(f"Sorry, {role_obj.name} is not a valid role.")
+        try:
+            await ctx.author.remove_roles(role_obj)
+            await ctx.channel.send(f"You no longer have the role{role_obj.name}.")
+        except discord.errors.Forbidden:
+            await ctx.send("I do not have permission to remove this role.")
 
 @iamnot.error
 async def iamnot_error(ctx,error):

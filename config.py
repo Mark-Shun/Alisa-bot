@@ -13,6 +13,7 @@ def setup(dev_arg):
     global MAIN_TOKEN
     global ROLES_CHANNEL
     global GUILD_ID
+    global VALID_ROLES_LOWER
 
     DEV = dev_arg
 
@@ -39,6 +40,7 @@ def setup(dev_arg):
         ROLES_CHANNEL = 352128965827231755
         # This is the ID of the Alisa server guild (server)
         GUILD_ID = 352127467223384076
+    VALID_ROLES_LOWER = [role.lower() for role in VALID_ROLES]
 
 CHAT_KEY = os.environ.get('OPENAI_ALISA_KEY')
 
@@ -51,6 +53,7 @@ PLATFORM_ROLES = ["PC", "PS4", "XBOX"]
 MISC_ROLES = ["Guest", "Streamer"]
 
 VALID_ROLES = CHARACTER_ROLES + REGION_ROLES + PLATFORM_ROLES + MISC_ROLES
+VALID_ROLES_LOWER = []
 
 Alisa_Server_ID = 352127467223384076
 
