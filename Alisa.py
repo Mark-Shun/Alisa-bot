@@ -97,7 +97,7 @@ async def iam(ctx, *, role):
     if (valid_result == True):
         role_obj = discord.utils.get(guild.roles, name=config.VALID_ROLES[index])
         if role_obj in ctx.author.roles:
-            await ctx.channel.send(f"You already have the role: {config.VALID_ROLES[index]}.")
+            await ctx.channel.send(f"But you already have the {config.VALID_ROLES[index]} role?")
         else:
 
             # Checking if character role gets changed, to eventually remove the other one
@@ -138,11 +138,11 @@ async def iamnot(ctx, *, role):
     guild = ctx.guild
     role_obj = discord.utils.get(guild.roles, name=config.VALID_ROLES[index])
     if role_obj not in ctx.author.roles:
-        await ctx.channel.send(f"You don't have the role{role_obj.name}!")
+        await ctx.channel.send(f"You don't have the {role_obj.name} role?")
     else:
         try:
             await ctx.author.remove_roles(role_obj)
-            await ctx.channel.send(f"You no longer have the role{role_obj.name}.")
+            await ctx.channel.send(f"You no longer have the {role_obj.name} role.")
         except discord.errors.Forbidden:
             await ctx.send("I do not have permission to remove this role.")
 

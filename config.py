@@ -57,4 +57,4 @@ VALID_ROLES_LOWER = []
 
 Alisa_Server_ID = 352127467223384076
 
-Welcome_Message = "*こんにちは！*\nWelcome to the Alisa Bosconovitch Discord server!\nI'm the Alisa bot and I hope you'll enjoy your stay.\nMake sure to take a look at the ***quick-start*** channel for the server rules, and to grab the roles you want over at the ***roles*** channel."
+Welcome_Message = "*こんにちは！*\nWelcome to the Alisa Bosconovitch Discord server!\nI'm Alisa bot and I hope you'll enjoy your stay.\nMake sure to take a look at the ***quick-start*** channel for the server rules, and grab some roles by heading over to the ***roles*** channel."
