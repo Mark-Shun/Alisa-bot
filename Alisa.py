@@ -6,17 +6,18 @@ import sys
 import re
 
 import config
+import data
 from responses import Responses
 from talk import OpenAI
 from discord.ext import commands
 
-# Check if the passed argument is dev or not to set the dev environment in config
+# Check if the passed argument is dev or not to set the dev environment in config.
 if len(sys.argv) > 1 and sys.argv[1].lower() == 'dev':
     config.setup(True)
 else:
     config.setup(False)
 
-# Logger that outputs to alisa.log with basic info and ERROR messages
+# Logger that outputs to alisa.log with basic info and ERROR messages.
 logger = logging.basicConfig(filename='alisa.log', 
                              level=logging.ERROR,
                              format='%(asctime)s %(levelname)s: %(message)s',
@@ -29,11 +30,13 @@ intents.members = True
 
 bot_name = ''
 
-# Decorator to check if a command is executed in the right channel
+roles_db = data.DataBase()
+
+# Decorator to check if a command is executed in the right channel.
 def in_allowed_channel(ctx):
     return ctx.channel.id in in_allowed_channel
 
-# Function to check if an asked role is the allowed list.
+# Function to check if an asked role is in the allowed list.
 def is_valid_role(role):
     for i in config.VALID_ROLES:
         if i == str(role):
