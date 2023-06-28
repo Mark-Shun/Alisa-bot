@@ -44,7 +44,9 @@ def is_valid_role(role):
 
 class Alisa(commands.Bot):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, 
+                         **kwargs, 
+                         activity = discord.Game(name="Tekken 7"))
         self.responses = None
         self.openai = None
         self.guild = None
@@ -64,7 +66,6 @@ class Alisa(commands.Bot):
         self.guild = bot.get_guild(config.GUILD_ID)
         self.alisa_main = discord.utils.get(self.guild.roles, name="Alisa Main")
         self.alisa_sub = discord.utils.get(self.guild.roles, name="Alisa Sub")
-        await bot.change_presence(activity=discord.Game(name="Tekken 7"))
         print(f'{bot_name} is now awake.')
 
 
