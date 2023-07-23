@@ -13,6 +13,7 @@ def setup(dev_arg):
     global MAIN_TOKEN
     global ROLES_CHANNEL
     global GUILD_ID
+    global VALID_ROLES_LOWER
 
     DEV = dev_arg
 
@@ -28,8 +29,7 @@ def setup(dev_arg):
         MAIN_TOKEN = os.environ.get('ALISA_BOT_TOKEN')
 
     if 'OPENAI_ALISA_KEY' not in os.environ:
-        warnings.warn("Environment variable OPENAI_ALISA_KEY not found. The bot will be closed down.")
-        sys.exit(0)
+        warnings.warn("Environment variable OPENAI_ALISA_KEY not found.")
     if DEV:
         # This is the ID for the test server roles channel, this is used to check if the role commands are used in the right channel
         ROLES_CHANNEL = 1083761874979532901
@@ -40,6 +40,7 @@ def setup(dev_arg):
         ROLES_CHANNEL = 352128965827231755
         # This is the ID of the Alisa server guild (server)
         GUILD_ID = 352127467223384076
+    VALID_ROLES_LOWER = [role.lower() for role in VALID_ROLES]
 
 CHAT_KEY = os.environ.get('OPENAI_ALISA_KEY')
 
@@ -52,5 +53,8 @@ PLATFORM_ROLES = ["PC", "PS4", "XBOX"]
 MISC_ROLES = ["Guest", "Streamer"]
 
 VALID_ROLES = CHARACTER_ROLES + REGION_ROLES + PLATFORM_ROLES + MISC_ROLES
+VALID_ROLES_LOWER = []
 
 Alisa_Server_ID = 352127467223384076
+
+Welcome_Message = "*こんにちは！*\nWelcome to the Alisa Bosconovitch Discord server!\nI'm Alisa bot and I hope you'll enjoy your stay.\nMake sure to take a look at the ***quick-start*** channel for the server rules, and grab some roles by heading over to the ***roles*** channel."

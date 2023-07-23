@@ -14,6 +14,7 @@ class Responses:
         self.alisa_happy = discord.utils.get(self.bot.emojis, name="Alisa_Happy")
         self.alisa_stronk = discord.utils.get(self.bot.emojis, name="Alisa_Stronk")
         self.alisus = discord.utils.get(self.bot.emojis, name="alisus")
+        self.alisa_laugh = discord.utils.get(self.bot.emojis, name="AlisaLaugh")
 
 
     async def handle_message(self, message):
