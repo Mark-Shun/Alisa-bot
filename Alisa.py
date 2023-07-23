@@ -46,7 +46,7 @@ class Alisa(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, 
                          **kwargs, 
-                         activity = discord.Game(name="Tekken 7"))
+                         activity = discord.Game(name="TEKKEN 7"))
         self.responses = None
         self.openai = None
         self.guild = None
