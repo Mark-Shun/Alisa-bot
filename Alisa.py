@@ -4,7 +4,6 @@ import logging
 import warnings
 import sys
 import re
-import asyncio
 
 import config
 from responses import Responses
@@ -44,6 +43,13 @@ def is_valid_role(role):
         index += 1
     return False, index
 
+# Custom check function to verify if the user has the "Admin" or "Moderator" role
+#TODO: Make this function correctly
+def is_staff(bot):
+    async def predicate(ctx):
+        return bot.admin_role in ctx.author.roles or bot.moderator_role in ctx.author.roles
+    return commands.check(predicate)
+
 class Alisa(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, 
@@ -55,6 +61,8 @@ class Alisa(commands.Bot):
         self.guild = None
         self.alisa_main = None
         self.alisa_sub = None
+        self.admin_role = None
+        self.moderator_role = None
 
     async def on_ready(self):
         # Checks if bot is being run on the Alisa server. For developing/testing change DEV in config.
@@ -70,6 +78,8 @@ class Alisa(commands.Bot):
         self.guild = bot.get_guild(config.GUILD_ID)
         self.alisa_main = discord.utils.get(self.guild.roles, name="Alisa Main")
         self.alisa_sub = discord.utils.get(self.guild.roles, name="Alisa Sub")
+        self.admin_role = discord.utils.get(self.guild.roles, name="Admin")
+        self.moderator_role = discord.utils.get(self.guild.roles, name="Moderator")
         print(f'{bot_name} is now awake.')
 
 
@@ -204,11 +214,12 @@ async def talk(ctx, *, message):
 #     await bot.activity_changer.test()
 #     await ctx.channel.send("Changed activity")
 
-# @bot.command()
-# async def random(ctx):
-#     """ Change my activity to a randomly chosen one """
-#     await bot.activity_changer.random()
-#     await ctx.channel.send("Changed to random activity")
+@bot.command(aliases=["rnd","random","randomActivity","random_activity"])
+@commands.check(lambda ctx: ctx.channel.id == config.STAFF_COMMANDS_CHANNEL)
+async def randomact(ctx):
+    """ Change my activity to a randomly chosen one (staff only) """
+    await bot.activity_changer.random()
+    await ctx.channel.send("Changed my current activity")
 
 # Replying to defined messages
 @bot.event
