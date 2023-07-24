@@ -84,7 +84,7 @@ class Alisa(commands.Bot):
 bot = Alisa(command_prefix=config.PREFIX, intents=intents, log_file='alisa.log')
 
 # Change bot's activity in regular intervals
-@tasks.loop(hours=2)
+@tasks.loop(hours=4)
 async def random_activity_change():
     await bot.activity_changer.random()
 

@@ -7,7 +7,7 @@ activities = [
     discord.Game(name="TEKKEN 7"),
     discord.Activity(type=discord.ActivityType.competing,name="King of Iron Fist Tournament"),
     discord.Activity(type=discord.ActivityType.watching,name="Gajimaru guides"),
-    discord.Streaming(name="Alisa Whiff Tutorial", url="https://www.youtube.com/watch?v=7dgtXQiP7J4&t=47s")
+    discord.Streaming(name="Alisa Whiff Tutorial", url="https://www.youtube.com/watch?v=7dgtXQiP7J4")
 ]
 
 class ActivityChanger:
@@ -15,7 +15,7 @@ class ActivityChanger:
         self.bot = bot
 
     async def test(self):
-        # activity = discord.Streaming(name="Alisa Whiff Tutorial", url="https://www.youtube.com/watch?v=7dgtXQiP7J4&t=47s")
+        # activity = discord.Streaming(name="Alisa Whiff Tutorial", url="https://www.youtube.com/watch?v=7dgtXQiP7J4")
         activity = discord.Game(name="TEKKEN REVOLUTION")
         # activity = discord.Activity(type=discord.ActivityType.listening,name="Moonlit Wilderness")
         await self.bot.change_presence(activity=activity)
