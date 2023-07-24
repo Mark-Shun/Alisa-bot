@@ -199,16 +199,16 @@ async def talk(ctx, *, message):
     #response = await bot.openai.generate_response(message)
     #await ctx.reply(str(response), mention_author = True)
 
-@bot.command()
-async def test(ctx):
-    await bot.activity_changer.test()
-    await ctx.channel.send("Changed activity")
+# @bot.command()
+# async def test(ctx):
+#     await bot.activity_changer.test()
+#     await ctx.channel.send("Changed activity")
 
-@bot.command()
-async def random(ctx):
-    """ Change my activity to a randomly chosen one """
-    await bot.activity_changer.random()
-    await ctx.channel.send("Changed to random activity")
+# @bot.command()
+# async def random(ctx):
+#     """ Change my activity to a randomly chosen one """
+#     await bot.activity_changer.random()
+#     await ctx.channel.send("Changed to random activity")
 
 # Replying to defined messages
 @bot.event
