@@ -7,6 +7,7 @@ import re
 
 import config
 from responses import Responses
+from activity import ActivityChanger
 from talk import OpenAI
 from discord.ext import commands
 
@@ -45,9 +46,9 @@ def is_valid_role(role):
 class Alisa(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, 
-                         **kwargs, 
-                         activity = discord.Game(name="TEKKEN 7"))
+                         **kwargs)
         self.responses = None
+        self.activity_changer = ActivityChanger(self)
         self.openai = None
         self.guild = None
         self.alisa_main = None
@@ -189,6 +190,16 @@ async def talk(ctx, *, message):
     #    return
     #response = await bot.openai.generate_response(message)
     #await ctx.reply(str(response), mention_author = True)
+
+@bot.command()
+async def test(ctx):
+    await bot.activity_changer.test()
+    await ctx.channel.send("Changed activity")
+
+@bot.command()
+async def random(ctx):
+    await bot.activity_changer.random()
+    await ctx.channel.send("Changed to random activity")
 
 # Replying to defined messages
 @bot.event
