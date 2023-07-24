@@ -52,9 +52,7 @@ def is_staff(bot):
 
 class Alisa(commands.Bot):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, 
-                         **kwargs,
-                         activity=discord.Game(name="TEKKEN 7"))
+        super().__init__(*args, **kwargs)
         self.responses = None
         self.activity_changer = ActivityChanger(self)
         self.openai = None
