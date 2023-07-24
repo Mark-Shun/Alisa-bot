@@ -4,12 +4,13 @@ import logging
 import warnings
 import sys
 import re
+import asyncio
 
 import config
 from responses import Responses
 from activity import ActivityChanger
 from talk import OpenAI
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 # Check if the passed argument is dev or not to set the dev environment in config
 if len(sys.argv) > 1 and sys.argv[1].lower() == 'dev':
@@ -46,7 +47,8 @@ def is_valid_role(role):
 class Alisa(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, 
-                         **kwargs)
+                         **kwargs,
+                         activity=discord.Game(name="TEKKEN 7"))
         self.responses = None
         self.activity_changer = ActivityChanger(self)
         self.openai = None
@@ -61,6 +63,7 @@ class Alisa(commands.Bot):
                 warnings.warn("NOTE: This bot is currently not executing on the Alisa server. \nClosing Alisa")
                 await bot.close()
                 sys.exit(0)
+        random_activity_change.start()
         self.responses = Responses(self)
         #self.openai = OpenAI(self)
         bot_name = (str(self.user)[0:-5])
@@ -71,6 +74,11 @@ class Alisa(commands.Bot):
 
 
 bot = Alisa(command_prefix=config.PREFIX, intents=intents, log_file='alisa.log')
+
+# Change bot's activity in regular intervals
+@tasks.loop(hours=2)
+async def random_activity_change():
+    await bot.activity_changer.random()
 
 # Error handler
 @bot.event
@@ -198,6 +206,7 @@ async def test(ctx):
 
 @bot.command()
 async def random(ctx):
+    """ Change my activity to a randomly chosen one """
     await bot.activity_changer.random()
     await ctx.channel.send("Changed to random activity")
 
