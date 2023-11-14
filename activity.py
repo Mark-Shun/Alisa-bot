@@ -11,7 +11,8 @@ activities = [
     {"activity": discord.Streaming(name="Alisa Whiff Tutorial", url="https://www.youtube.com/watch?v=7dgtXQiP7J4"), "weight": 3},
     {"activity": discord.Game(name="Final Fantasy V"), "weight": 1},
     {"activity": discord.Game(name="Harvest Moon 64"), "weight": 1},
-    {"activity": discord.Game(name="Final Fantasy XIII"), "weight": 1}
+    {"activity": discord.Game(name="Final Fantasy XIII"), "weight": 1},
+    {"activity": discord.Game(name="Sonic Adventure 2 in Chao Garden"), "weight": 1}
 ]
 
 # Puts activities in a new list, which multiplies the amount of times the activity is represented according to its weight
