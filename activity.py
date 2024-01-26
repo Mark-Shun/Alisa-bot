@@ -3,10 +3,10 @@ import random
 
 # Activities list made out of dictionaries consisting of activity and the weight of said activity
 activities = [
-    {"activity": discord.Game(name="TEKKEN 6"), "weight": 3},
-    {"activity": discord.Game(name="TEKKEN TAG TOURNAMENT 2"), "weight": 3},
-    {"activity": discord.Game(name="TEKKEN 7"), "weight": 4},
-    {"activity": discord.Game(name="TEKKEN 8"), "weight": 2},
+    {"activity": discord.Game(name="TEKKEN 6"), "weight": 2},
+    {"activity": discord.Game(name="TEKKEN TAG TOURNAMENT 2"), "weight": 2},
+    {"activity": discord.Game(name="TEKKEN 7"), "weight": 2},
+    {"activity": discord.Game(name="TEKKEN 8"), "weight": 7},
     {"activity": discord.Activity(type=discord.ActivityType.competing, name="King of Iron Fist Tournament"), "weight": 2},
     {"activity": discord.Streaming(name="Alisa Whiff Tutorial", url="https://www.youtube.com/watch?v=7dgtXQiP7J4"), "weight": 3},
     {"activity": discord.Game(name="Final Fantasy V"), "weight": 1},
