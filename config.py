@@ -7,6 +7,7 @@ MAIN_TOKEN = None
 ROLES_CHANNEL = None
 STAFF_COMMANDS_CHANNEL = None
 GUILD_ID = None
+BOT_LOGS = None
 
 # Ran at the start of the program to decide which tokens/keys to use depending on the dev argument being passed.
 def setup(dev_arg):
@@ -16,6 +17,7 @@ def setup(dev_arg):
     global GUILD_ID
     global STAFF_COMMANDS_CHANNEL
     global VALID_ROLES_LOWER
+    global BOT_LOGS
 
     DEV = dev_arg
 
@@ -39,6 +41,8 @@ def setup(dev_arg):
         GUILD_ID = 427866625899888640
         # This is the ID for the staff commands channel, this is used to check if the Alisa bot staff commands are used in the right channel
         STAFF_COMMANDS_CHANNEL = 1083354072972791848
+        # THis is the ID for the test server logs channel
+        BOT_LOGS = 1228993022679842838
     else:
         # This is the ID for the roles channel, this is used to check if the role commands are used in the right channel
         ROLES_CHANNEL = 352128965827231755
@@ -46,6 +50,8 @@ def setup(dev_arg):
         GUILD_ID = 352127467223384076
         # This is the ID for the staff commands channel, this is used to check if the Alisa bot staff commands are used in the right channel
         STAFF_COMMANDS_CHANNEL = 1133070771103744020
+        # This is the ID for the logs channel
+        BOT_LOGS = 1228355954978853025
     VALID_ROLES_LOWER = [role.lower() for role in VALID_ROLES]
 
 CHAT_KEY = os.environ.get('OPENAI_ALISA_KEY')

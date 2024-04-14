@@ -8,6 +8,7 @@ import re
 import config
 from responses import Responses
 from activity import ActivityChanger
+from anti_spam import AntiSpam
 from talk import OpenAI
 from discord.ext import commands, tasks
 
@@ -28,6 +29,8 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 
+# client = discord.Client(intents=intents)
+
 bot_name = ''
 
 # Decorator to check if a command is executed in the right channel
@@ -44,7 +47,6 @@ def is_valid_role(role):
     return False, index
 
 # Custom check function to verify if the user has the "Admin" or "Moderator" role
-#TODO: Make this function correctly
 def is_staff(bot):
     async def predicate(ctx):
         return bot.admin_role in ctx.author.roles or bot.moderator_role in ctx.author.roles
@@ -61,6 +63,7 @@ class Alisa(commands.Bot):
         self.alisa_sub = None
         self.admin_role = None
         self.moderator_role = None
+        self.anti_spam = None
 
     async def on_ready(self):
         # Checks if bot is being run on the Alisa server. For developing/testing change DEV in config.
@@ -78,6 +81,7 @@ class Alisa(commands.Bot):
         self.alisa_sub = discord.utils.get(self.guild.roles, name="Alisa Sub")
         self.admin_role = discord.utils.get(self.guild.roles, name="Admin")
         self.moderator_role = discord.utils.get(self.guild.roles, name="Moderator")
+        self.anti_spam = AntiSpam(self, bot.get_channel(config.BOT_LOGS))
         print(f'{bot_name} is now awake.')
 
 
@@ -194,7 +198,7 @@ async def about(ctx):
     alisa_happy = discord.utils.get(bot.emojis, name="Alisa_Happy")
     if alisa_happy == None:
         alisa_happy = ""
-    message = f"Hello I'm the Alisa Bosconovitch Bot V1.2, nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but over time you'll figure out for what I keep an eye out.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down please contact the staff :)"
+    message = f"Hello I'm the Alisacord Bot V1.3, nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but over time you'll figure out for what I keep an eye out.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down please contact the staff :)"
     await ctx.reply(message)
 
 @bot.command(aliases=["speak","chat"])
@@ -207,11 +211,6 @@ async def talk(ctx, *, message):
     #response = await bot.openai.generate_response(message)
     #await ctx.reply(str(response), mention_author = True)
 
-# @bot.command()
-# async def test(ctx):
-#     await bot.activity_changer.test()
-#     await ctx.channel.send("Changed activity")
-
 @bot.command(aliases=["rnd","random","randomActivity","random_activity"])
 @commands.check(lambda ctx: ctx.channel.id == config.STAFF_COMMANDS_CHANNEL)
 async def randomact(ctx):
@@ -219,7 +218,7 @@ async def randomact(ctx):
     await bot.activity_changer.random()
     await ctx.channel.send("Changed my current activity")
 
-# Replying to defined messages
+# Perform functions on detected messages
 @bot.event
 async def on_message(message):
     # Wait for the bot to finish initializing before processing messages
@@ -227,13 +226,15 @@ async def on_message(message):
     await bot.process_commands(message)
 
     if message.author == bot.user:
-        return # Ignore Alisa's own messages
+        return # Ignore Alisacord's own messages
     
     if message.content.startswith(config.PREFIX):
         return # Ignore messages that start with the command prefix
 
-    # Send message to the handle_message function to check and respond to
+    # Send message to the handle_message function to check and potentially reply with an Alisa response
     await bot.responses.handle_message(message)
+    # Check if the message contains spam and log/delete it if a regex rule gets triggered
+    await bot.anti_spam.spam_handle_message(message)
 
 @bot.event
 # Handling welcome message for new member
