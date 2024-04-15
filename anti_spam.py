@@ -6,7 +6,7 @@ import config
 bot_logs_id = config.BOT_LOGS
 
 regex_list = [
-    r"(teen|only\s*?fans).+?(discord\.gg\/(?!s83mVcT)\w*|discord\.invite\/(?!s83mVcT)\w*)"
+    r"(teen|only\s*?fans)(.|\n)*?(discord\.gg\/(?!s83mVcT)\w*|discord\.invite\/(?!s83mVcT)\w*)"
 ]
 
 async def regex_check(message):
