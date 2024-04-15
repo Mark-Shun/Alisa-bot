@@ -7,7 +7,7 @@ bot_logs_id = config.BOT_LOGS
 
 regex_list = [
     r"join\s*(my|this)\s*(server|discord|discord\sserver)\s*https?:\/\/discord\.gg\/(?!s83mVcT)\S*",
-    r"discord\.com\/invite\/(?!s83mVcT)",
+    r"discord\.(com|gg)\/invite\/(?!s83mVcT)",
     r"free\s*(teen|only\s*?fans|OF).+*discord\.(com|gg)"
 ]
 
