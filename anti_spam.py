@@ -6,9 +6,7 @@ import config
 bot_logs_id = config.BOT_LOGS
 
 regex_list = [
-    r"join\s*(my|this)\s*(server|discord|discord\sserver)\s*https?:\/\/discord\.gg\/(?!s83mVcT)\S*",
-    r"discord\.(com|gg)\/invite\/(?!s83mVcT)",
-    r"free\s*(teen|only\s*?fans|OF).+*discord\.(com|gg)"
+    r"(teen|only\s*?fans).+?(discord\.gg\/(?!s83mVcT)\w*|discord\.invite\/(?!s83mVcT)\w*)"
 ]
 
 async def regex_check(message):

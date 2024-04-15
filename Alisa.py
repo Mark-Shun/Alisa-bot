@@ -9,7 +9,7 @@ import config
 from responses import Responses
 from activity import ActivityChanger
 from anti_spam import AntiSpam
-from talk import OpenAI
+# from talk import OpenAI
 from discord.ext import commands, tasks
 
 # Check if the passed argument is dev or not to set the dev environment in config
