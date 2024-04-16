@@ -9,9 +9,10 @@ Welcome to the repository for the Alisa Discord bot. Due to having lost the prev
 - Can connect to Discord's developer bot service
 - Appointing/removing roles through commands
 - Alisa responses in chat
-- Error handling
+- Spam check and deletion
 - Directed welcome message when new member joins the server
-- ~~Interface with chatGPT API for chatting~~ (Out of tokens :) )
+- Error handling
+- ~~Interface with chatGPT API for chatting~~ (Ran out of tokens :) )
 
 
 ## Planned Features
