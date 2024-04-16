@@ -57,7 +57,7 @@ class Alisa(commands.Bot):
         super().__init__(*args, **kwargs)
         self.responses = None
         self.activity_changer = ActivityChanger(self)
-        self.openai = None
+        # self.openai = None
         self.guild = None
         self.alisa_main = None
         self.alisa_sub = None

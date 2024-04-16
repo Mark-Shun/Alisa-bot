@@ -9,7 +9,7 @@ Welcome to the repository for the Alisa Discord bot. Due to having lost the prev
 - Can connect to Discord's developer bot service
 - Appointing/removing roles through commands
 - Alisa responses in chat
-- Spam check and deletion
+- Spam messages check and deletion
 - Directed welcome message when new member joins the server
 - Error handling
 - ~~Interface with chatGPT API for chatting~~ (Ran out of tokens :) )
@@ -67,7 +67,7 @@ Besides that a key for openAI's API is also used.
 To get these tokens and key the script retrieves them from the system environment. Make sure they're stored in the environment with the following variable names:
 - ALISA_BOT_TOKEN
 - ALISA_TEST_BOT_TOKEN
-- OPENAI_ALISA_KEY
+- ~~OPENAI_ALISA_KEY~~
 
 ## Configuration
 Configuration is done in the config.py file, tokens, keys and variables can be found there.

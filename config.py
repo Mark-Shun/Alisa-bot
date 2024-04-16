@@ -32,8 +32,9 @@ def setup(dev_arg):
             sys.exit(0)
         MAIN_TOKEN = os.environ.get('ALISA_BOT_TOKEN')
 
-    if 'OPENAI_ALISA_KEY' not in os.environ:
-        warnings.warn("Environment variable OPENAI_ALISA_KEY not found.")
+    # if 'OPENAI_ALISA_KEY' not in os.environ:
+        # warnings.warn("Environment variable OPENAI_ALISA_KEY not found.")
+        
     if DEV:
         # This is the ID for the test server roles channel, this is used to check if the role commands are used in the right channel
         ROLES_CHANNEL = 1083761874979532901
@@ -54,7 +55,7 @@ def setup(dev_arg):
         BOT_LOGS = 1228355954978853025
     VALID_ROLES_LOWER = [role.lower() for role in VALID_ROLES]
 
-CHAT_KEY = os.environ.get('OPENAI_ALISA_KEY')
+# CHAT_KEY = os.environ.get('OPENAI_ALISA_KEY')
 
 PREFIX = '.'
 WORD_LIMIT = 200
