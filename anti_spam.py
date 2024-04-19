@@ -9,8 +9,8 @@ bot_logs_id = config.BOT_LOGS
 author_spam_count = {}
 
 regex_list = [
-    r"(teen|only\s*?fans)(.|\n)*?(discord\.gg\/(?!s83mVcT)\w*|discord\S*invite\/(?!s83mVcT)\w*)",
-    r"(discord\.gg\/(?!s83mVcT)\w*|discord\S*invite\/(?!s83mVcT)\w*)(.|\n)*?(teen|only\s*?fans)"
+    r"(sex|porn|teen|only\s*?fans)(.|\n)*?(discord\.gg\/(?!s83mVcT)\w*|discord\S*invite\/(?!s83mVcT)\w*)",
+    r"(discord\.gg\/(?!s83mVcT)\w*|discord\S*invite\/(?!s83mVcT)\w*)(.|\n)*?(sex|porn|teen|only\s*?fans)"
 ]
 
 async def regex_check(message):
