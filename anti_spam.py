@@ -7,7 +7,8 @@ bot_logs_id = config.BOT_LOGS
 
 regex_list = [
     r"(teen|only\s*?fans)(.|\n)*?(discord\.gg\/(?!s83mVcT)\w*|discord\S*invite\/(?!s83mVcT)\w*)",
-    r"(discord\.gg\/(?!s83mVcT)\w*|discord\S*invite\/(?!s83mVcT)\w*)(.|\n)*?(teen|only\s*?fans)"
+    r"(discord\.gg\/(?!s83mVcT)\w*|discord\S*invite\/(?!s83mVcT)\w*)(.|\n)*?(teen|only\s*?fans)",
+    r"(steam.*gift.*https?:\/\/)"
 ]
 
 async def regex_check(message):
