@@ -11,7 +11,8 @@ author_spam_count = {}
 regex_list = [
     r"(sex|porn|teen|only\s*?fans)(.|\n)*?(discord\.gg\/(?!s83mVcT)\w*|discord\S*invite\/(?!s83mVcT)\w*)",
     r"(discord\.gg\/(?!s83mVcT)\w*|discord\S*invite\/(?!s83mVcT)\w*)(.|\n)*?(sex|porn|teen|only\s*?fans)",
-    r"(steam.*gift.*https?:\/\/)"
+    r"(steam.*gift.*https?:\/\/)",
+    r"(\bhttps?:\/\/\S*shorturl\S*\b)"
 ]
 
 async def regex_check(message):
