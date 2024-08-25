@@ -15,11 +15,12 @@ class Responses:
         self.alisa_stronk = discord.utils.get(self.bot.emojis, name="Alisa_Stronk")
         self.alisus = discord.utils.get(self.bot.emojis, name="alisus")
         self.alisa_laugh = discord.utils.get(self.bot.emojis, name="AlisaLaugh")
+        self.chainsaw_ok = discord.utils.get(self.bot.emojis, name=":arisabrrrr")
 
 
     async def handle_message(self, message):
         p_message = message.content.lower()
-        if "alisa is c tier" in p_message or "c tier" in p_message:
+        if "alisa is c tier" in p_message:
             await message.channel.send(f'So true! {self.alisa_notes}')
         if "alisa dance" == p_message:
             await message.channel.send(self.alisa_dancing)
@@ -43,5 +44,6 @@ class Responses:
             await message.reply(self.alisa_stronk)
         if "nsfw alisa" in p_message:
             await message.reply(self.alisus)
-        
+        if "i love chainsaws" in p_message or "i love design" in p_message:
+            await message.reply(self.chainsaw_ok)
         

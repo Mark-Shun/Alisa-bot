@@ -1,8 +1,14 @@
-#This file is used to not push certain things to the git repository
+# This file is used to not push certain things to the git repository
 
-##Specific Alisa related files##
+# Specific Alisa related files
 alisa.log
 ./alisa.log
 
 # Python related files
 __pycache__/
+*.py[cod]
+*$py.class
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt

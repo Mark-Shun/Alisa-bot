@@ -8,8 +8,10 @@ import re
 import config
 import data
 from responses import Responses
-from talk import OpenAI
-from discord.ext import commands
+from activity import ActivityChanger
+from anti_spam import AntiSpam
+# from talk import OpenAI
+from discord.ext import commands, tasks
 
 # Check if the passed argument is dev or not to set the dev environment in config.
 if len(sys.argv) > 1 and sys.argv[1].lower() == 'dev':
@@ -28,6 +30,8 @@ intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 
+# client = discord.Client(intents=intents)
+
 bot_name = ''
 
 roles_db = data.DataBase()
@@ -45,16 +49,24 @@ def is_valid_role(role):
         index += 1
     return False, index
 
+# Custom check function to verify if the user has the "Admin" or "Moderator" role
+def is_staff(bot):
+    async def predicate(ctx):
+        return bot.admin_role in ctx.author.roles or bot.moderator_role in ctx.author.roles
+    return commands.check(predicate)
+
 class Alisa(commands.Bot):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, 
-                         **kwargs, 
-                         activity = discord.Game(name="Tekken 7"))
+        super().__init__(*args, **kwargs)
         self.responses = None
-        self.openai = None
+        self.activity_changer = ActivityChanger(self)
+        # self.openai = None
         self.guild = None
         self.alisa_main = None
         self.alisa_sub = None
+        self.admin_role = None
+        self.moderator_role = None
+        self.anti_spam = None
 
     async def on_ready(self):
         # Checks if bot is being run on the Alisa server. For developing/testing change DEV in config.
@@ -63,16 +75,25 @@ class Alisa(commands.Bot):
                 warnings.warn("NOTE: This bot is currently not executing on the Alisa server. \nClosing Alisa")
                 await bot.close()
                 sys.exit(0)
+        random_activity_change.start()
         self.responses = Responses(self)
         #self.openai = OpenAI(self)
         bot_name = (str(self.user)[0:-5])
         self.guild = bot.get_guild(config.GUILD_ID)
         self.alisa_main = discord.utils.get(self.guild.roles, name="Alisa Main")
         self.alisa_sub = discord.utils.get(self.guild.roles, name="Alisa Sub")
+        self.admin_role = discord.utils.get(self.guild.roles, name="Admin")
+        self.moderator_role = discord.utils.get(self.guild.roles, name="Moderator")
+        self.anti_spam = AntiSpam(self, bot.get_channel(config.BOT_LOGS))
         print(f'{bot_name} is now awake.')
 
 
 bot = Alisa(command_prefix=config.PREFIX, intents=intents, log_file='alisa.log')
+
+# Change bot's activity in regular intervals
+@tasks.loop(hours=4)
+async def random_activity_change():
+    await bot.activity_changer.random()
 
 # Error handler
 @bot.event
@@ -101,7 +122,7 @@ async def iam(ctx, *, role):
     if (valid_result == True):
         role_obj = discord.utils.get(guild.roles, name=config.VALID_ROLES[index])
         if role_obj in ctx.author.roles:
-            await ctx.channel.send(f"But you already have the {config.VALID_ROLES[index]} role?")
+            await ctx.channel.send(f"Don't you already have the {config.VALID_ROLES[index]} role?")
         else:
 
             # Checking if character role gets changed, to eventually remove the other one
@@ -142,7 +163,7 @@ async def iamnot(ctx, *, role):
     guild = ctx.guild
     role_obj = discord.utils.get(guild.roles, name=config.VALID_ROLES[index])
     if role_obj not in ctx.author.roles:
-        await ctx.channel.send(f"You don't have the {role_obj.name} role?")
+        await ctx.channel.send(f"You don't seem to have the {role_obj.name} role?")
     else:
         try:
             await ctx.author.remove_roles(role_obj)
@@ -180,7 +201,7 @@ async def about(ctx):
     alisa_happy = discord.utils.get(bot.emojis, name="Alisa_Happy")
     if alisa_happy == None:
         alisa_happy = ""
-    message = f"Hello I'm the Alisa Bosconovitch Bot V1.2, nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but over time you'll figure out for what I keep an eye out.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down please contact the staff :)"
+    message = f"Hello I'm the Alisacord Bot V1.3, nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but over time you'll figure out for what I keep an eye out.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down please contact the staff :)"
     await ctx.reply(message)
 
 @bot.command(aliases=["speak","chat"])
@@ -198,6 +219,14 @@ async def admin(ctx):
     """ Command for the staff to moderate the server """
 
 # Replying to defined messages
+@bot.command(aliases=["rnd","random","randomActivity","random_activity"])
+@commands.check(lambda ctx: ctx.channel.id == config.STAFF_COMMANDS_CHANNEL)
+async def randomact(ctx):
+    """ Change my activity to a randomly chosen one (staff only) """
+    await bot.activity_changer.random()
+    await ctx.channel.send("Changed my current activity")
+
+# Perform functions on detected messages
 @bot.event
 async def on_message(message):
     # Wait for the bot to finish initializing before processing messages
@@ -205,13 +234,15 @@ async def on_message(message):
     await bot.process_commands(message)
 
     if message.author == bot.user:
-        return # Ignore Alisa's own messages
+        return # Ignore Alisacord's own messages
     
     if message.content.startswith(config.PREFIX):
         return # Ignore messages that start with the command prefix
 
-    # Send message to the handle_message function to check and respond to
+    # Send message to the handle_message function to check and potentially reply with an Alisa response
     await bot.responses.handle_message(message)
+    # Check if the message contains spam and log/delete it if a regex rule gets triggered
+    await bot.anti_spam.spam_handle_message(message)
 
 @bot.event
 # Handling welcome message for new member
