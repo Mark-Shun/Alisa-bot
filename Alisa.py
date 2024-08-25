@@ -31,6 +31,7 @@ intents.members = True
 
 # client = discord.Client(intents=intents)
 
+# Declaring the Alisa bot name, later gets adjusted.
 bot_name = ''
 
 # Decorator to check if a command is executed in the right channel
@@ -52,6 +53,7 @@ def is_staff(bot):
         return bot.admin_role in ctx.author.roles or bot.moderator_role in ctx.author.roles
     return commands.check(predicate)
 
+# Class consisting of the Alisa bot
 class Alisa(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -65,8 +67,9 @@ class Alisa(commands.Bot):
         self.moderator_role = None
         self.anti_spam = None
 
+    # Once the bot is up and running, execute the following statements.
     async def on_ready(self):
-        # Checks if bot is being run on the Alisa server. For developing/testing change DEV in config.
+        # Checks if bot is being run on the Alisa server. For developing/testing the Alisa bot run it with the "dev" argument in the terminal.
         if(not(config.DEV)):
             if bot.guilds[0].id != config.Alisa_Server_ID:
                 warnings.warn("NOTE: This bot is currently not executing on the Alisa server. \nClosing Alisa")
@@ -84,7 +87,7 @@ class Alisa(commands.Bot):
         self.anti_spam = AntiSpam(self, bot.get_channel(config.BOT_LOGS))
         print(f'{bot_name} is now awake.')
 
-
+# Initialize the Alisa bot
 bot = Alisa(command_prefix=config.PREFIX, intents=intents, log_file='alisa.log')
 
 # Change bot's activity in regular intervals
@@ -92,7 +95,7 @@ bot = Alisa(command_prefix=config.PREFIX, intents=intents, log_file='alisa.log')
 async def random_activity_change():
     await bot.activity_changer.random()
 
-# Error handler
+# Error handler when command is not found
 @bot.event
 async def on_command_error(ctx,error):
     if isinstance(error, commands.CommandNotFound):
@@ -101,7 +104,7 @@ async def on_command_error(ctx,error):
             return # The message does not start with a . followed by a letter
         await ctx.reply(f"That command is not recognized, use {config.PREFIX}help for guidance.", mention_author=True)
 
-# Role management
+# Main role management functionality
 @bot.command(aliases=["am"])
 @commands.check(lambda ctx: ctx.channel.id == config.ROLES_CHANNEL)
 async def iam(ctx, *, role):
@@ -142,11 +145,13 @@ async def iam(ctx, *, role):
     else:
         await ctx.channel.send(f"Sorry, {role_name} is not a valid role.")
 
+# Error handler when the role doesn't exist
 @iam.error
 async def iam_error(ctx,error):
     if isinstance(error, commands.RoleNotFound):
         await ctx.send(f"Excuse me, but that role does not exist.")
 
+# Command to remove a role
 @bot.command(aliases=["imnot"])
 @commands.check(lambda ctx: ctx.channel.id == config.ROLES_CHANNEL)
 async def iamnot(ctx, *, role):
@@ -168,6 +173,7 @@ async def iamnot(ctx, *, role):
         except discord.errors.Forbidden:
             await ctx.send("I do not have permission to remove this role.")
 
+# Error handler for assigning roles
 @iamnot.error
 async def iamnot_error(ctx,error):
     if isinstance(error, commands.RoleNotFound):
@@ -201,6 +207,7 @@ async def about(ctx):
     message = f"Hello I'm the Alisacord Bot V1.3, nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but over time you'll figure out for what I keep an eye out.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down please contact the staff :)"
     await ctx.reply(message)
 
+# Disabled code which was used for OpenAI chat bot
 @bot.command(aliases=["speak","chat"])
 async def talk(ctx, *, message):
     """ (Currently unavailable) """
@@ -211,6 +218,7 @@ async def talk(ctx, *, message):
     #response = await bot.openai.generate_response(message)
     #await ctx.reply(str(response), mention_author = True)
 
+# Change bot's activity to a randomly chosen one from the list of activities.
 @bot.command(aliases=["rnd","random","randomActivity","random_activity"])
 @commands.check(lambda ctx: ctx.channel.id == config.STAFF_COMMANDS_CHANNEL)
 async def randomact(ctx):
@@ -236,8 +244,8 @@ async def on_message(message):
     # Check if the message contains spam and log/delete it if a regex rule gets triggered
     await bot.anti_spam.spam_handle_message(message)
 
+# Handling welcome message send as a DM to new members
 @bot.event
-# Handling welcome message for new member
 async def on_member_join(member):
     try:
         await member.send(config.Welcome_Message)

@@ -6,8 +6,10 @@ import asyncio
 
 bot_logs_id = config.BOT_LOGS
 
+# Keeps track how often an user sent a spam message in a specific amount of time.
 author_spam_count = {}
 
+# List of regex rules that will trigger a spam message
 regex_list = [
     r"(sex|porn|teen|only\s*?fans)(.|\n)*?(discord\.gg\/(?!s83mVcT)\w*|discord\S*invite\/(?!s83mVcT)\w*)",
     r"(discord\.gg\/(?!s83mVcT)\w*|discord\S*invite\/(?!s83mVcT)\w*)(.|\n)*?(sex|porn|teen|only\s*?fans)",
@@ -15,12 +17,14 @@ regex_list = [
     r"(\bhttps?:\/\/\S*shorturl\S*\b)"
 ]
 
+# Checks if the message contains any of the regex rules
 async def regex_check(message):
     for regex in regex_list:
         if re.search(regex, message.content.lower()):
             return True, regex
     return False, "-"
 
+# Sets up the embed message which gets sent to staff when a spam message is detected
 async def setup_spam_embed(message,triggered_regex):
     spam_embed = discord.Embed(
         title="Spam message detected and deleted",
@@ -33,6 +37,7 @@ async def setup_spam_embed(message,triggered_regex):
     spam_embed.add_field(name="Regex triggered", value=triggered_regex)
     return spam_embed
 
+# Checks if an author has sent too many spam messages in a specific amount of time
 async def check_spam_author(message, logs_channel):
     author_id = str(message.author.id)
     if author_id in author_spam_count:

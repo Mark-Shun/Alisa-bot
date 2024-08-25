@@ -2,6 +2,7 @@ import discord
 
 # This class is used for responding to specific messages in the discord server
 class Responses:
+    # Initializes the bot with specific emojis
     def __init__(self, bot):
         self.bot = bot
         self.alisa_notes = discord.utils.get(self.bot.emojis, name='AlisaNotes')
@@ -17,7 +18,7 @@ class Responses:
         self.alisa_laugh = discord.utils.get(self.bot.emojis, name="AlisaLaugh")
         self.chainsaw_ok = discord.utils.get(self.bot.emojis, name=":arisabrrrr")
 
-
+    # Check if an user message contains a specific response
     async def handle_message(self, message):
         p_message = message.content.lower()
         if "alisa is c tier" in p_message:
