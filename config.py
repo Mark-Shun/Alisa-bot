@@ -41,7 +41,7 @@ def setup(dev_arg):
         # This is the ID of the test guild (server)
         GUILD_ID = 427866625899888640
         # This is the ID for the staff commands channel, this is used to check if the Alisa bot staff commands are used in the right channel
-        STAFF_COMMANDS_CHANNEL = 1083354072972791848
+        STAFF_COMMANDS_CHANNEL = 1133071816223625317
         # THis is the ID for the test server logs channel
         BOT_LOGS = 1228993022679842838
     else:

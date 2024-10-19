@@ -9,6 +9,7 @@ import config
 from responses import Responses
 from activity import ActivityChanger
 from anti_spam import AntiSpam
+from moderation import Moderation
 # from talk import OpenAI
 from discord.ext import commands, tasks
 
@@ -66,6 +67,7 @@ class Alisa(commands.Bot):
         self.admin_role = None
         self.moderator_role = None
         self.anti_spam = None
+        self.moderation = None
 
     # Once the bot is up and running, execute the following statements.
     async def on_ready(self):
@@ -85,6 +87,7 @@ class Alisa(commands.Bot):
         self.admin_role = discord.utils.get(self.guild.roles, name="Admin")
         self.moderator_role = discord.utils.get(self.guild.roles, name="Moderator")
         self.anti_spam = AntiSpam(self, bot.get_channel(config.BOT_LOGS))
+        self.moderation = Moderation(self, bot.get_channel(config.BOT_LOGS))
         print(f'{bot_name} is now awake.')
 
 # Initialize the Alisa bot
@@ -225,6 +228,12 @@ async def randomact(ctx):
     """ Change my activity to a randomly chosen one (staff only) """
     await bot.activity_changer.random()
     await ctx.channel.send("Changed my current activity")
+
+@bot.command(aliases=["warnUser", "warning", "warnuser", "warn_user"])
+@commands.check(lambda ctx: ctx.channel.id == config.STAFF_COMMANDS_CHANNEL)
+async def warn(ctx, user: discord.User, *, reason):
+    """ Warn an user through DM (staff only) """
+    await bot.moderation.warn_user(ctx, user, reason)
 
 # Perform functions on detected messages
 @bot.event
