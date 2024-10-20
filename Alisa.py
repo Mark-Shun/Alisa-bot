@@ -49,7 +49,7 @@ def is_valid_role(role):
     return False, index
 
 # Custom check function to verify if the user has the "Admin" or "Moderator" role
-def is_staff(bot):
+def is_staff():
     async def predicate(ctx):
         return bot.admin_role in ctx.author.roles or bot.moderator_role in ctx.author.roles
     return commands.check(predicate)
@@ -224,13 +224,16 @@ async def talk(ctx, *, message):
 # Change bot's activity to a randomly chosen one from the list of activities.
 @bot.command(aliases=["rnd","random","randomActivity","random_activity"])
 @commands.check(lambda ctx: ctx.channel.id == config.STAFF_COMMANDS_CHANNEL)
+@is_staff()
 async def randomact(ctx):
     """ Change my activity to a randomly chosen one (staff only) """
     await bot.activity_changer.random()
     await ctx.channel.send("Changed my current activity")
 
+# Issue a warning through DM to an user.
 @bot.command(aliases=["warnUser", "warning", "warnuser", "warn_user"])
 @commands.check(lambda ctx: ctx.channel.id == config.STAFF_COMMANDS_CHANNEL)
+@is_staff()
 async def warn(ctx, user: discord.User, *, reason):
     """ Warn an user through DM (staff only) """
     await bot.moderation.warn_user(ctx, user, reason)
