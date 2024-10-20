@@ -20,6 +20,7 @@ async def setup_warn_log_embed(ctx, user, reason):
     )
     warn_log_embed.add_field(name="Moderator", value=ctx.author.name)
     warn_log_embed.add_field(name="User in question", value=user.name)
+    warn_log_embed.add_field(name="User ID", value=user.id)
     warn_log_embed.add_field(name="Explanation", value=reason)
     return warn_log_embed
 
