@@ -10,7 +10,6 @@ from responses import Responses
 from activity import ActivityChanger
 from anti_spam import AntiSpam
 from moderation import Moderation
-# from talk import OpenAI
 from discord.ext import commands, tasks
 
 # Check if the passed argument is dev or not to set the dev environment in config
@@ -60,7 +59,6 @@ class Alisa(commands.Bot):
         super().__init__(*args, **kwargs)
         self.responses = None
         self.activity_changer = ActivityChanger(self)
-        # self.openai = None
         self.guild = None
         self.alisa_main = None
         self.alisa_sub = None
@@ -79,7 +77,6 @@ class Alisa(commands.Bot):
                 sys.exit(0)
         random_activity_change.start()
         self.responses = Responses(self)
-        #self.openai = OpenAI(self)
         bot_name = (str(self.user)[0:-5])
         self.guild = bot.get_guild(config.GUILD_ID)
         self.alisa_main = discord.utils.get(self.guild.roles, name="Alisa Main")
@@ -209,17 +206,6 @@ async def about(ctx):
         alisa_happy = ""
     message = f"Hello I'm the Alisacord Bot V1.4, nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but over time you'll figure out for what I keep an eye out.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down, please contact the staff :)"
     await ctx.reply(message)
-
-# Disabled code which was used for OpenAI chat bot
-@bot.command(aliases=["speak","chat"])
-async def talk(ctx, *, message):
-    """ (Currently unavailable) """
-    await ctx.reply("Sorry that command is currently unavailable.")
-    #if len(message.split()) > config.WORD_LIMIT:
-    #    await ctx.reply(f"Owh that's a bit much to compute, please keep your message under the {config.WORD_LIMIT} words size limit.")
-    #    return
-    #response = await bot.openai.generate_response(message)
-    #await ctx.reply(str(response), mention_author = True)
 
 # Change bot's activity to a randomly chosen one from the list of activities.
 @bot.command(aliases=["rnd","random","randomActivity","random_activity"])

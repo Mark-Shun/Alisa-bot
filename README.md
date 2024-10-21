@@ -13,8 +13,6 @@ Welcome to the repository for the Alisa Discord bot. Due to having lost the prev
 - Directed welcome message when new member joins the server
 - Send warnings through DMs
 - Error handling
-- ~~Interface with chatGPT API for chatting~~ (Ran out of tokens :) )
-
 
 ## Planned Features
 - Admin/mod command tools for configuration
@@ -64,11 +62,9 @@ To run the bot on a testing server, parse the appropriate flag
 
 ## Environment
 The code uses tokens for two bots, namely the main Alisa bot and a testing bot.
-Besides that a key for openAI's API is also used.
 To get these tokens and key the script retrieves them from the system environment. Make sure they're stored in the environment with the following variable names:
 - ALISA_BOT_TOKEN
 - ALISA_TEST_BOT_TOKEN
-- ~~OPENAI_ALISA_KEY~~
 
 ## Configuration
 Configuration is done in the config.py file, tokens, keys and variables can be found there.
