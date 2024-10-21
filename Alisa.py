@@ -207,7 +207,7 @@ async def about(ctx):
     alisa_happy = discord.utils.get(bot.emojis, name="Alisa_Happy")
     if alisa_happy == None:
         alisa_happy = ""
-    message = f"Hello I'm the Alisacord Bot V1.3, nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but over time you'll figure out for what I keep an eye out.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down please contact the staff :)"
+    message = f"Hello I'm the Alisacord Bot V1.4, nice to meet you! {alisa_happy}\n\nI've been created by and for this Discord server.\nThere are certain commands I react to which you can see with .help.\nFurthermore I can react to some messages, but over time you'll figure out for what I keep an eye out.\n\nBesides that I'm still being tinkered on so please bear with me.\nIf I start to break down, please contact the staff :)"
     await ctx.reply(message)
 
 # Disabled code which was used for OpenAI chat bot
@@ -234,8 +234,14 @@ async def randomact(ctx):
 @bot.command(aliases=["warnUser", "warning", "warnuser", "warn_user"])
 @commands.check(lambda ctx: ctx.channel.id == config.STAFF_COMMANDS_CHANNEL)
 @is_staff()
-async def warn(ctx, user: discord.User, *, reason):
+async def warn(ctx, user_input: str, *, reason):
     """ Warn an user through DM (staff only) """
+    await ctx.guild.chunk(cache=True)  # Update the guild members list
+    user = bot.guild.get_member_named(user_input)
+    if user == None:
+        await ctx.reply(f"User \"{user_input}\" was not found.\nPlease check your spelling and make sure it is the nickname they use on the server.")
+        return
+    await ctx.reply(f"Found user: {user.name}.\nSending warning...")
     await bot.moderation.warn_user(ctx, user, reason)
 
 # Perform functions on detected messages

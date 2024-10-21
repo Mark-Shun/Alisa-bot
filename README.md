@@ -11,6 +11,7 @@ Welcome to the repository for the Alisa Discord bot. Due to having lost the prev
 - Alisa responses in chat
 - Spam messages check and deletion
 - Directed welcome message when new member joins the server
+- Send warnings through DMs
 - Error handling
 - ~~Interface with chatGPT API for chatting~~ (Ran out of tokens :) )
 
