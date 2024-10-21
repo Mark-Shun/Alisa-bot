@@ -3,6 +3,7 @@ import warnings
 import config
 import asyncio
 
+# Set up the embed message which gets sent to the user who got issued a warning
 async def setup_warn_embed(reason):
     warn_embed = discord.Embed(
         title="A warning from Alisacord staff has been issued",
@@ -12,6 +13,7 @@ async def setup_warn_embed(reason):
     warn_embed.add_field(name="Explanation", value=reason)
     return warn_embed
 
+# Set up the embed message which gets sent to the staff's logs
 async def setup_warn_log_embed(ctx, user, reason):
     warn_log_embed = discord.Embed(
         title="Warning issued",
@@ -24,11 +26,13 @@ async def setup_warn_log_embed(ctx, user, reason):
     warn_log_embed.add_field(name="Explanation", value=reason)
     return warn_log_embed
 
+# Class which handles additional moderation related functions
 class Moderation:
     def __init__(self, bot, bot_logs):
         self.bot = bot
         self.bot_logs = bot_logs
 
+    # Function which sends a warning to a user
     async def warn_user(self, ctx, user, reason):
         warn_embed = await setup_warn_embed(reason)
         warn_log_embed = await setup_warn_log_embed(ctx, user, reason)
@@ -38,4 +42,3 @@ class Moderation:
         except discord.errors.Forbidden:
             warnings.warn(f"Forbidden to send warning to: {user.name}")
             await ctx.channel.send(f"Failed to send warning to: {user.name}\nReason: I don't have permission to send DMs to this user.")
-        

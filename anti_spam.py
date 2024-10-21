@@ -63,6 +63,7 @@ class AntiSpam:
         self.anti_spam = {}
         self.bot_logs = bot_logs
 
+    # Checks if the message contains any of the regex rules and handles spam messages
     async def spam_handle_message(self, message):
         regex_check_result, triggered_regex = await regex_check(message)
         if regex_check_result:

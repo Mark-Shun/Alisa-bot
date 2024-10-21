@@ -115,10 +115,8 @@ async def iam(ctx, *, role):
         await ctx.channel.send(f"Nice try. {bot.responses.alisa_laugh}")
         return
     guild = ctx.guild
-    # role_obj = discord.utils.get(guild.roles, name=role.name)
-    # if role_obj is None:
-    #     await ctx.send(f"Excuse me, but the {role} role does not exist.")
     valid_result, index = is_valid_role(role_name)
+
     if (valid_result == True):
         role_obj = discord.utils.get(guild.roles, name=config.VALID_ROLES[index])
         if role_obj in ctx.author.roles:
@@ -179,7 +177,7 @@ async def iamnot_error(ctx,error):
     if isinstance(error, commands.RoleNotFound):
         await ctx.send(f"Excuse me, but that role does not exist.")
 
-# Displays all the roles
+# Displays all the assignable roles
 @bot.command(aliases=["lsar"])
 @commands.check(lambda ctx: ctx.channel.id == config.ROLES_CHANNEL)
 async def roles(ctx):
@@ -197,7 +195,7 @@ async def roles(ctx):
     message += "\n- ".join(config.MISC_ROLES)
     await ctx.channel.send(message)
 
-# Prints an about message
+# Prints an about the bot message
 @bot.command()
 async def about(ctx):
     """ Introduces the bot """
@@ -248,7 +246,7 @@ async def on_message(message):
     # Check if the message contains spam and log/delete it if a regex rule gets triggered
     await bot.anti_spam.spam_handle_message(message)
 
-# Handling welcome message send as a DM to new members
+# Handling welcome message sent as a DM to new members
 @bot.event
 async def on_member_join(member):
     try:
@@ -265,5 +263,4 @@ async def on_member_join(member):
     except discord.errors.HTTPException:
         warnings.warn(f"Failed to send {arisa_picture.name} picture.")
         
-
 bot.run(config.MAIN_TOKEN)

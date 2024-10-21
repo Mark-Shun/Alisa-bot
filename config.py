@@ -50,10 +50,11 @@ def setup(dev_arg):
         STAFF_COMMANDS_CHANNEL = 1133070771103744020
         # This is the ID for the logs channel
         BOT_LOGS = 1228355954978853025
+
+    # This is the list of valid roles that can be used in the bot, it lowercases all the role names to prevent capitilization mismatches.    
     VALID_ROLES_LOWER = [role.lower() for role in VALID_ROLES]
 
-PREFIX = '.'
-WORD_LIMIT = 200
+PREFIX = '.' # The command prefix for the Alisa bot
 
 CHARACTER_ROLES = ["Alisa Main", "Alisa Sub"]
 REGION_ROLES = ["NA-EAST", "NA-WEST", "EU-EAST", "EU-WEST", "SOUTH-AMERICA", "OCE", "MEA", "EAST-ASIA", "SOUTH-ASIA", "SEA"]
