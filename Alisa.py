@@ -62,6 +62,7 @@ class Alisa(commands.Bot):
         self.guild = None
         self.alisa_main = None
         self.alisa_sub = None
+        self.guest = None
         self.admin_role = None
         self.moderator_role = None
         self.anti_spam = None
@@ -81,9 +82,10 @@ class Alisa(commands.Bot):
         self.guild = bot.get_guild(config.GUILD_ID)
         self.alisa_main = discord.utils.get(self.guild.roles, name="Alisa Main")
         self.alisa_sub = discord.utils.get(self.guild.roles, name="Alisa Sub")
+        self.guest = discord.utils.get(self.guild.roles, name="Guest")
         self.admin_role = discord.utils.get(self.guild.roles, name="Admin")
         self.moderator_role = discord.utils.get(self.guild.roles, name="Moderator")
-        self.anti_spam = AntiSpam(self, bot.get_channel(config.BOT_LOGS))
+        self.anti_spam = AntiSpam(self, bot.get_channel(config.BOT_LOGS), self.alisa_main, self.alisa_sub, self.guest)
         self.moderation = Moderation(self, bot.get_channel(config.BOT_LOGS))
         print(f'{bot_name} is now awake.')
 
