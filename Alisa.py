@@ -50,7 +50,7 @@ def is_valid_role(role):
 # Custom check function to verify if the user has the "Admin" or "Moderator" role
 def is_staff():
     async def predicate(ctx):
-        return bot.admin_role in ctx.author.roles or bot.moderator_role in ctx.author.roles
+        return bot.admin_role in ctx.author.roles or bot.moderator_role in ctx.author.roles or bot.discord_tech_role in ctx.author.roles
     return commands.check(predicate)
 
 # Class consisting of the Alisa bot
@@ -65,6 +65,7 @@ class Alisa(commands.Bot):
         self.guest = None
         self.admin_role = None
         self.moderator_role = None
+        self.discord_tech_role = None
         self.anti_spam = None
         self.moderation = None
 
@@ -85,6 +86,7 @@ class Alisa(commands.Bot):
         self.guest = discord.utils.get(self.guild.roles, name="Guest")
         self.admin_role = discord.utils.get(self.guild.roles, name="Admin")
         self.moderator_role = discord.utils.get(self.guild.roles, name="Moderator")
+        self.discord_tech_role = discord.utils.get(self.guild.roles, name="Server Tech")
         self.anti_spam = AntiSpam(self, bot.get_channel(config.BOT_LOGS), self.alisa_main, self.alisa_sub, self.guest)
         self.moderation = Moderation(self, bot.get_channel(config.BOT_LOGS))
         print(f'{bot_name} is now awake.')
@@ -113,7 +115,7 @@ async def iam(ctx, *, role):
     """ Assign a role (only in #roles) """
     #Check if the role exists
     role_name = role.lower()
-    if (role_name == "admin" or role_name == "moderator"):
+    if (role_name == "admin" or role_name == "moderator" or role_name == "server tech"):
         await ctx.channel.send(f"Nice try. {bot.responses.alisa_laugh}")
         return
     guild = ctx.guild
