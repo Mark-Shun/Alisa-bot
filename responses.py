@@ -1,4 +1,5 @@
 import discord
+import re
 
 # This class is used for responding to specific messages in the discord server
 class Responses:
@@ -21,30 +22,30 @@ class Responses:
     # Check if an user message contains a specific response
     async def handle_message(self, message):
         p_message = message.content.lower()
-        if "alisa is c tier" in p_message:
+        if re.search(r"\balisa is c tier\b", p_message):
             await message.channel.send(f'So true! {self.alisa_notes}')
-        if "alisa dance" == p_message:
+        if re.search(r"^\balisa dance\b$", p_message):
             await message.channel.send(self.alisa_dancing)
-        if "alisa baila" == p_message:
+        if re.search(r"^\balisa baila\b$", p_message):
             await message.channel.send(self.alisa_baila)
-        if "alisa sucks" in p_message or "alisa is bad" in p_message:
+        if re.search(r"\balisa sucks\b", p_message) or re.search(r"\balisa is bad\b", p_message):
             await message.channel.send(self.alisa_pout)
-        if "alisa is top tier" in p_message:
+        if re.search(r"\balisa is top tier\b", p_message):
             await message.channel.send(self.arisa)
-        if "alisa is low tier" in p_message or "alisa is bottom tier" in p_message:
+        if re.search(r"\balisa is low tier\b", p_message) or re.search(r"\balisa is bottom tier\b", p_message):
             await message.channel.send(self.alisa_cry)
-        if "alisa bible" == p_message:
+        if re.search(r"^\balisa bible\b$", p_message):
             await message.channel.send("Find the Alisa Bible here: https://docs.google.com/document/d/1hntdSiK3CBprurfSRCm5mKmc7hsGxBwA2ILQZBX2l8Y/edit?usp=sharing")
-        if "heart" == p_message:
+        if re.search(r"^\bheart\b$", p_message):
             await message.channel.send(self.heart)
-        if "i love alisa" == p_message:
+        if re.search(r"^\bi love alisa\b$", p_message):
             await message.reply(f'I love you too {self.alisa_happy}')
-        if "nerf alisa" == p_message:
+        if re.search(r"^\bnerf alisa\b$", p_message):
             await message.reply(self.alisa_pout)
-        if "buff alisa" in p_message:
+        if re.search(r"\bbuff alisa\b", p_message):
             await message.reply(self.alisa_stronk)
-        if "nsfw alisa" in p_message:
+        if re.search(r"\bnsfw alisa\b", p_message):
             await message.reply(self.alisus)
-        if "i love chainsaws" in p_message or "i love design" in p_message:
+        if re.search(r"\bi love chainsaws\b", p_message) or re.search(r"\bi love design\b", p_message):
             await message.reply(self.chainsaw_ok)
         
