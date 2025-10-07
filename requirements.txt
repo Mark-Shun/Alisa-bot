@@ -1,0 +1,2 @@
+# These pip packages are utilised by the Alisa Discord bot.
+discord.py
