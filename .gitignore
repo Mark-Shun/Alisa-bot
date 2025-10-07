@@ -9,6 +9,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Environment related files
+.env
+.venv
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
